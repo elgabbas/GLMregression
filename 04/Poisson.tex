@@ -1,20 +1,21 @@
 Poisson-regression
-Install required packages
-Poisson regression
-Simulate data
-Using glm()
-Using vglm() from package VGAM
-Analyse event rates
-Overdispersion
-Adjusted Poisson-regression
-Heteroscedasticity consistent standard errors
-Negative binomial regression
-Test the negative binomial model against the Poisson model
-Zero-inflated Regression models
-Zero-inflated Poisson regression
-Zero-inflated negative binomial regression
-Detach (automatically) loaded packages (if possible)
-Get the article source from GitHub
+%Install required packages
+%Poisson regression
+%Simulate data
+%Using glm()
+%Using vglm() from package VGAM
+%Analyse event rates
+%Overdispersion
+%Adjusted Poisson-regression
+%Heteroscedasticity consistent standard errors
+%Negative binomial regression
+%Test the negative binomial model against the Poisson model
+%Zero-inflated Regression models
+%Zero-inflated Poisson regression
+%Zero-inflated negative binomial regression
+%Detach (automatically) loaded packages (if possible)
+%Get the article source from GitHub
+%============================================================== %
 Install required packages
 lmtest, MASS, pscl, sandwich, VGAM
 
@@ -72,7 +73,7 @@ exp(confint(glmFitP))
 X1          0.7413  0.810
 X2          0.9776  1.023
 Using vglm() from package VGAM
-
+%============================================================== %
 library(VGAM)
 summary(vglmFit <- vglm(Y ~ X1 + X2, family=poissonff, data=dfCount))
 # not shown
@@ -95,6 +96,7 @@ Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
 Null Deviance:      51.7 
 Residual Deviance: 50.7     AIC: 503 
 Overdispersion
+%============================================================== %
 Adjusted Poisson-regression
 
 Same parameter estimates as in Poisson model, but different standard errors, hence different p-values
@@ -190,7 +192,7 @@ library(VGAM)
 vglm(Y ~ X1 + X2, family=negbinomial, data=dfCount)
 # not shown
 Test the negative binomial model against the Poisson model
-
+%============================================================== %
 library(pscl)
 odTest(glmFitNB)
 Error: Objekt 'dfCount' nicht gefunden
@@ -223,6 +225,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Number of iterations in BFGS optimization: 10 
 Log-likelihood: -402 on 4 Df
 Using vglm() from package VGAM
+
+%============================================================== %
 
 library(VGAM)
 vglm(Y ~ X1 + X2, family=zipoissonff, data=dfCount)
@@ -265,12 +269,12 @@ Theta = 32.287
 Number of iterations in BFGS optimization: 26 
 Log-likelihood: -402 on 5 Df
 Using vglm() from package VGAM
-
+%============================================================== %
 library(VGAM)
 vglm(Y ~ X1 + X2, family=zinegbinomial, data=dfCount)
 # not shown
 Vuong-Test using vuong() from package pscl: negative binomial model against zero-inflated negative binomial model
-
+%============================================================== %
 library(pscl)
 vuong(ziFitNB, glmFitNB)
 Vuong Non-Nested Hypothesis Test-Statistic: 1.612 
