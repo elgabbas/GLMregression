@@ -1,8 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.11)  2 NOV 2014 19:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.11)  2 NOV 2014 19:50
 entering extended mode
-**01-MultinomialLogistic.tex
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.tex
-"
+**02-OrdinalLogistic2.tex
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -788,8 +787,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \FrameRule=\dimen190
 \FrameSep=\dimen191
 )))
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.aux
-")
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.aux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
@@ -869,10 +867,8 @@ LaTeX Info: Redefining \ref on input line 2.
 LaTeX Info: Redefining \pageref on input line 2.
 LaTeX Info: Redefining \nameref on input line 2.
 
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.out
-")
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.out
-")
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.out")
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.out")
 \@outlinefile=\write5
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 2.
@@ -958,11 +954,9 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 LaTeX Info: Redefining \includegraphics on input line 2.
 
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.vrb
-")
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 15.
+(Font)              size <5> substituted on input line 9.
 
 
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
@@ -970,10 +964,7 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [1
 
 {C:/Users/Computer 7/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \vbox (10.1061pt too high) detected at line 21
- []
-
-
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.vrb")
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [2
@@ -984,15 +975,6 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [3
 
 ]
-Overfull \hbox (21.7025pt too wide) in paragraph at lines 34--34
-\OT1/cmss/m/n/14.4 http://www.stat.berkeley.edu/classes/s133/factors.html  
- []
-
-
-Overfull \vbox (64.9061pt too high) detected at line 34
- []
-
-
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [4
@@ -1003,6 +985,7 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [5
 
 ]
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.vrb")
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [6
@@ -1013,18 +996,21 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [7
 
 ]
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [8
+
+]
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 51.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 51.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 62.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 62.
 
-("C:\Users\Computer 7\Documents\GitHub\GLMregression\01-MultinomialLogistic.aux
-")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 51.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 51.
-Package rerunfilecheck Info: File `01-MultinomialLogistic.out' has not changed.
-
+("C:\Users\Computer 7\Documents\GitHub\GLMregression\02-OrdinalLogistic2.aux")
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 62.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 62.
+Package rerunfilecheck Info: File `02-OrdinalLogistic2.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
@@ -1033,18 +1019,19 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 16289 strings out of 493921
- 315781 string characters out of 3144860
+ 16276 strings out of 493921
+ 315491 string characters out of 3144860
  379404 words of memory out of 3000000
- 19199 multiletter control sequences out of 15000+200000
- 5321 words of font info for 20 fonts, out of 3000000 for 9000
+ 19182 multiletter control sequences out of 15000+200000
+ 5320 words of font info for 20 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 64i,14n,57p,714b,555s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb>
-
-Output written on 01-MultinomialLogistic.pdf (7 pages, 53628 bytes).
+ 64i,14n,57p,491b,549s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on 02-OrdinalLogistic2.pdf (8 pages, 85601 bytes).
 PDF statistics:
- 200 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
+ 233 PDF objects out of 1000 (max. 8388607)
+ 17 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

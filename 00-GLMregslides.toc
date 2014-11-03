@@ -1,1 +1,2 @@
 \beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {1}{Ordinal Logistic Regression with \texttt {R}}{8}{0}{1}

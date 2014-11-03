@@ -1,0 +1,12 @@
+\begin{verbatim}
+## odds ratios
+exp(coef(m))
+##  pared public    gpa
+## 2.8511 0.9429 1.8514
+## OR and CI
+exp(cbind(OR = coef(m), ci))
+##            OR  2.5 % 97.5 %
+## pared  2.8511 1.6958  4.817
+## public 0.9429 0.5209  1.681
+## gpa    1.8514 1.1136  3.098
+\end{verbatim}

@@ -12,13 +12,13 @@
 	\frametitle{Ordered logistic regression \texttt{R} }
 	\Large
 
-Below we use the polr command from the MASS package to estimate an ordered logistic regression model. The command name comes from proportional odds logistic regression, highlighting the proportional odds assumption in our model. 
+Below we use the \texttt{polr} command from the MASS package to estimate an ordered logistic regression model. The command name comes from proportional odds logistic regression, highlighting the proportional odds assumption in our model. 
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
 	\Large
-	polr uses the standard formula interface in R for specifying a regression model with outcome followed by predictors. We also specify Hess=TRUE to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
+	\texttt{polr} uses the standard formula interface in R for specifying a regression model with outcome followed by predictors. We also specify \texttt{Hess=TRUE} to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
@@ -28,12 +28,14 @@ Below we use the polr command from the MASS package to estimate an ordered logis
 	\begin{verbatim}
 	
 	## fit ordered logit model and store results 'm'
-m <- polr(apply ~ pared + public + gpa, data = dat, Hess=TRUE)
+m <- polr(apply ~ pared + 
+          public + gpa, data = dat, Hess=TRUE)
 
 ## view a summary of the model
 summary(m)
 ## Call:
-## polr(formula = apply ~ pared + public + gpa, data = dat, Hess = TRUE)
+## polr(formula = apply ~ pared + 
+             public + gpa, data = dat, Hess = TRUE)
 \end{verbatim}
 \end{framed}
 \end{frame}
@@ -80,13 +82,21 @@ Next we see the estimates for the two intercepts, which are sometimes called cut
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
 	\Large
-Finally, we see the residual deviance, -2 * Log Likelihood of the model as well as the AIC. Both the deviance and AIC are useful for model comparison.
-Some people are not satisfied without a p value. One way to calculate a p-value in this case is by comparing the t-value against the standard normal distribution, like a z test. Of course this is only true with infinite degrees of freedom, but is reasonably approximated by large samples, becoming increasingly biased as sample size decreases. This approach is used in other software packages such as Stata and is trivial to do. First we store the coefficient table, then calculate the pvalues and combine back with the table.
+\begin{itemize}
+\item Finally, we see the residual deviance, -2 * Log Likelihood of the model as well as the AIC. Both the deviance and AIC are useful for model comparison.
+\item Some people are not satisfied without a p value. One way to calculate a p-value in this case is by comparing the t-value against the standard normal distribution, like a z test. 
+\end{itemize}
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
 	\Large
+Of course this is only true with infinite degrees of freedom, but is reasonably approximated by large samples, becoming increasingly biased as sample size decreases. This approach is used in other software packages such as Stata and is trivial to do. First we store the coefficient table, then calculate the pvalues and combine back with the table.
+\end{frame}
+%================================================ %
+\begin{frame}[fragile]
+	\frametitle{Ordered logistic regression \texttt{R} }
+	\large
 \begin{framed}		
 	\begin{verbatim}
 		
@@ -106,7 +116,7 @@ p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
-	\Large
+	\large
 \begin{framed}		
 	\begin{verbatim}
 		
