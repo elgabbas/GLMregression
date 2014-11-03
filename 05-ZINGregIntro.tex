@@ -1,0 +1,14 @@
+ %================================%
+ % - http://www.stata.com/support/faqs/statistics/overdispersion-and-excess-zeros/
+ %================================%
+My raw data contain evidence of both overdispersion and “excess zeros”. Is a zero-inflated negative binomial model the only count data model that can account for both the overdispersion and “excess zeros”? 
+Short answer
+ %================================%
+ The short answer is no. Either unobserved heterogeneity or a process that has separate mechanisms for generating zero and nonzero counts can produce both overdispersion and “excess zeros” in the raw data. A simple negative binomial model, nbreg, a zero-inflated Poisson model, zip, and a zero-inflated negative binomial model, zinb are all candidates for count data with these characteristics. It is important to keep in mind, however, that very different probability models underlie these models. In particular, negative binomial models model between-subject heterogeneity. Zero-inflated models have different probability models for the zero and nonzero counts.
+ 
+There are Wald and likelihood-ratio (LR) tests for evaluating the relative fits of zip and zinb, and there is a Vuong test for choosing between nbreg and zinb.
+ 
+ 
+ %================================%
+ 
+ \end{document}
