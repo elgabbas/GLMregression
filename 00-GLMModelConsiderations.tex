@@ -43,7 +43,17 @@ Things to consider
 % Negative binomial regression
 
 Things to consider
- 
+ •It is not recommended that negative binomial models be applied to small samples. 
+•One common cause of over-dispersion is excess zeros by an additional data generating process. In this situation, zero-inflated model should be considered.
+•If the data generating process does not allow for any 0s (such as the number of days spent in the hospital), then a zero-truncated model may be more appropriate.
+•Count data often have an exposure variable, which indicates the number of times the event could have happened. This variable should be incorporated into your negative binomial regression model with the use of the offset option. See the glm documentation for details.
+•The outcome variable in a negative binomial regression cannot have negative numbers.
+•You will need to use the m1$resid command to obtain the residuals from our model to check other assumptions of the negative binomial model (see Cameron and Trivedi (1998) and Dupont (2002) for more information).
+
+Things to consider
+%======================================================================================%
+
+% Zero Inflated Negative binomial regression 
 Here are some issues that you may want to consider in the course of your research analysis.
  •Question about the over-dispersion parameter is in general a tricky one. A large over-dispersion parameter could be due to a miss-specified model or could be due to a real process with over-dispersion. Adding an over-dispersion problem does not necessarily improve a miss-specified model. 
 •The zero inflated negative binomial model has two parts, a negative binomial count model and the logit model for predicting excess zeros, so you might want to review these Data Analysis Example pages, Negative Binomial Regression and Logit Regression. 
