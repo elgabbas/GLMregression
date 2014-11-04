@@ -1,7 +1,21 @@
 
+
 %================================================================================================%
+\documentclass[00-GLMregslides.tex]{subfiles}
+
+\begin{document}
+	
+\newpage
+	
+\Large
+	
+
+%================================================================================================%
+
 \begin{frame}[fragile]
- 
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{itemize}
 \item The ratio of the probability of choosing one outcome category over the probability of choosing the baseline category is often referred as 
 relative risk (and it is also sometimes referred as odds as we have just used to described the regression parameters above). 
@@ -12,6 +26,9 @@ exponentiated regression coefficients are relative risk ratios for a unit change
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 
 extract the coefficients from the model and exponentiate
 \begin{framed}
@@ -26,6 +43,9 @@ exp(coef(test))
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{itemize}
 \item The relative risk ratio for a one-unit increase in the variable write is .9437 for being in general program vs. academic program. 
 \item The relative risk ratio switching from ses = 1 to 3 is .3126 for being in general program vs. academic program. 
@@ -33,7 +53,9 @@ exp(coef(test))
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
-\begin{itemize}
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{itemize}
 \item You can also use predicted probabilities to help you understand the model. 
 \item You can calculate predicted probabilities for each of our outcome levels using the fitted function. 
@@ -42,6 +64,9 @@ exp(coef(test))
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{verbatim}
 head(pp <- fitted(test))
  
@@ -59,6 +84,9 @@ variable while holding the other constant. We will first do this holding write a
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{verbatim}
 dses <- data.frame(ses = c("low", "middle", "high"), write = mean(ml$write))
 predict(test, newdata = dses, "probs")
@@ -70,13 +98,19 @@ predict(test, newdata = dses, "probs")
 \end{verbatim}
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile] 
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 Another way to understand the model using the predicted probabilities is to look at the averaged predicted probabilities for different values 
 of the continuous predictor variable write within each level of ses.
  
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{verbatim}
 dwrite <- data.frame(ses = rep(c("low", "middle", "high"), each = 41), write = rep(c(30:70),
     3))
@@ -87,6 +121,9 @@ pp.write <- cbind(dwrite, predict(test, newdata = dwrite, type = "probs", se = T
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
  calculate the mean probabilities within each level of ses
 \begin{verbatim}
 by(pp.write[, 3:5], pp.write$ses, colMeans)
@@ -105,7 +142,10 @@ by(pp.write[, 3:5], pp.write$ses, colMeans)
 \end{verbatim}
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile] 
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{itemize}
 \item Sometimes, a couple of plots can convey a good deal amount of information. 
 \item Using the predictions we generated for the pp.write object above, we can plot the predicted probabilities against the writing score by the level 
@@ -113,7 +153,10 @@ of ses for different levels of the outcome variable.
 \end{itemize} 
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile] 
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
  melt data set to long for ggplot2
 \begin{verbatim}
 lpp <- melt(pp.write, id.vars = c("ses", "write"), value.name = "probability")
@@ -129,7 +172,10 @@ head(lpp)  # view first few rows
 \end{verbatim}
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile]  
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large 
  plot predicted probabilities across write values for each level of ses
  facetted by program type
 \begin{verbatim}
@@ -139,7 +185,10 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
 \end{verbatim}
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile] 
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \textbf{Things to consider}
 \begin{itemize}
 \item The Independence of Irrelevant Alternatives (IIA) assumption: Roughly, the IIA assumption means that adding or deleting alternative outcome categories does not affect the odds among the remaining outcomes. There are alternative modeling methods, such as alternative-specific multinomial probit model, or nested logit model to relax the IIA assumption.
@@ -149,7 +198,10 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
 
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile] 
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \textbf{Things to consider}
 \begin{itemize}
 \item Complete or quasi-complete separation: Complete separation means that the outcome variable separate a predictor variable completely, leading perfect prediction by the predictor variable.
@@ -159,3 +211,4 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
 
 \end{frame}
 %================================================================================================%
+\end{document}
