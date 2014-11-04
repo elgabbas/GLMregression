@@ -1,26 +1,51 @@
-R Data Analysis Examples: Multinomial Logistic Regression
+%% R Data Analysis Examples: Multinomial Logistic Regression
+
+\documentclass[00-GLMregslides.tex]{subfiles}
+
+\begin{document}
+	
+\newpage
+	
+\Large
+	
+
 
 Multinomial logistic regression is used to model nominal outcome variables, in which the log odds of the outcomes are modeled as a linear combination of the predictor variables.
 
-This page uses the following packages. Make sure that you can load them before trying to run the examples on this page. If you do not have a package installed, run: install.packages("packagename"), or if you see the version is out of date, run: update.packages().
  
+\end{frame}
 
+%================================================================================================%
+\begin{frame}[fragile]
+
+This page uses the following packages. Make sure that you can load them before trying to run the examples on this page. If you do not have a package installed, run: install.packages("packagename"), or if you see the version is out of date, run: update.packages().
+
+\begin{framed}
+\begin{verbatim}
 
 require(foreign)
 require(nnet)
 require(ggplot2)
 require(reshape2)
- 
-Version info: Code for this page was tested in R version 3.1.0 (2014-04-10)
- On: 2014-06-13
- With: reshape2 1.2.2; ggplot2 0.9.3.1; nnet 7.3-8; foreign 0.8-61; knitr 1.5 
+\end{verbatim}
+\end{framed}
 
-Please note: The purpose of this page is to show how to use various data analysis commands. It does not cover all aspects of the research process which researchers are expected to do. In particular, it does not cover data cleaning and checking, verification of assumptions, model diagnostics or potential follow-up analyses. 
+% Version info: Code for this page was tested in R version 3.1.0 (2014-04-10)
+% On: 2014-06-13
+% With: reshape2 1.2.2; ggplot2 0.9.3.1; nnet 7.3-8; foreign 0.8-61; knitr 1.5 
+
+% Please note: The purpose of this page is to show how to use various data analysis commands. 
+% It does not cover all aspects of the research process which researchers are expected to do. 
+% In particular, it does not cover data cleaning and checking, verification of assumptions, model diagnostics or potential follow-up analyses. 
 
 \end{frame}
+
 %================================================================================================%
 \begin{frame}[fragile]
-Examples of multinomial logistic regression
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
+\textbf{Examples of multinomial logistic regression}
 
 Example 1. People's occupational choices might be influenced by their parents' occupations and their own education level. We can study the relationship of one's occupation choice with education level and father's occupation. The occupational choices will be the outcome variable which consists of categories of occupations. 
 
@@ -36,14 +61,18 @@ Example 3. Entering high school students make program choices among general prog
  
 For our data analysis example, we will expand the third example using the hsbdemo data set. Let's first read in the data.
  
-
+\begin{verbatim}
 
 ml <- read.dta("http://www.ats.ucla.edu/stat/data/hsbdemo.dta")
+\end{verbatim}
  
 The data set contains variables on 200 students. The outcome variable is prog, program type. The predictor variables are social economic status, ses, a three-level categorical variable and writing score, write, a continuous variable. Let's start with getting some descriptive statistics of the variables of interest.
- 
+\end{frame} 
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 
 
 with(ml, table(ses, prog))
@@ -61,6 +90,13 @@ with(ml, do.call(rbind, tapply(write, prog, function(x) c(M = mean(x), SD = sd(x
  academic 56.26 7.943
  vocation 46.76 9.319
  
+
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 Analysis methods you might consider
 \begin{itemize}
 \item Multinomial logistic regression, the focus of this page. 
@@ -71,6 +107,9 @@ Analysis methods you might consider
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
 \begin{itemize}
 \item Collapsing number of categories to two and then doing a logistic regression: This approach suffers from loss of information and changes the original research questions to very different ones. 
 \item Ordinal logistic regression: If the outcome variable is truly ordered and if it also satisfies the assumption of proportional odds, then switching to ordinal logistic regression will make the model more parsimonious.
@@ -78,4 +117,5 @@ Analysis methods you might consider
 \item Nested logit model, another way to relax the IIA assumption, also requires the data structure be choice-specific. 
 \end{itemize}
 \end{frame}
+\end{document}
 %================================================================================================%
