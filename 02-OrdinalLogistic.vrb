@@ -3,13 +3,13 @@
 \begin{framed}
 \begin{verbatim}
 
-## combined table
+ combined table
 (ctable <- cbind(ctable, "p value" = p))
-##                                Value Std. Error t value   p value
-## pared                        1.04769     0.2658  3.9418 8.087e-05
-## public                      -0.05879     0.2979 -0.1974 8.435e-01
-## gpa                          0.61594     0.2606  2.3632 1.812e-02
-## unlikely|somewhat likely     2.20391     0.7795  2.8272 4.696e-03
-## somewhat likely|very likely  4.29936     0.8043  5.3453 9.027e-08
+                                Value Std. Error t value   p value
+ pared                        1.04769     0.2658  3.9418 8.087e-05
+ public                      -0.05879     0.2979 -0.1974 8.435e-01
+ gpa                          0.61594     0.2606  2.3632 1.812e-02
+ unlikely|somewhat likely     2.20391     0.7795  2.8272 4.696e-03
+ somewhat likely|very likely  4.29936     0.8043  5.3453 9.027e-08
 \end{verbatim}
 \end{framed}

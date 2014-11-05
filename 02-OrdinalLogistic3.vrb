@@ -1,3 +1,5 @@
-\frametitle{Ordered logistic regression \texttt{R} }
+
+\frametitle{Ordinal Logistic Regression with \texttt{R}}
 \Large
-The first command creates the function that estimates the values that will be graphed. The first line of this command tells R that sf is a function, and that this function takes one argument, which we label y. The sf function will calculate the log odds of being greater than or equal to each value of the target variable. For our purposes, we would like the log odds of apply being greater than or equal to 2, and then greater than or equal to 3. Depending on the number of categories in your dependent variable, and the coding of your variables, you may have to edit this function. Below the function is configured for a y variable with three levels, 1, 2, 3.
+
+However, Harrell does recommend a graphical method for assessing the parallel slopes assumption. The values displayed in this graph are essentially (linear) predictions from a logit model, used to model the probability that y is greater than or equal to a given value (for each level of y), using one predictor (x) variable at a time. In order create this graph, you will need the Hmisc library.

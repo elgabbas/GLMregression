@@ -1,1 +1,38 @@
-
+\documentclass[00-GLMregslides.tex]{subfiles}
+\begin{document}
+	
+	%================================================================================================%
+	\begin{frame}[fragile]
+		
+		\frametitle{Ordinal Logistic Regression with \texttt{R}}
+		\Large
+		
+		One of the assumptions underlying ordinal logistic (and ordinal probit) regression is that the relationship between each pair of outcome groups is the same. In other words, ordinal logistic regression assumes that the coefficients that describe the relationship between, say, the lowest versus all higher categories of the response variable are the same as those that describe the relationship between the next lowest category and all higher categories, etc. This is called the proportional odds assumption or the parallel regression assumption. 
+		
+	\end{frame}
+	%================================================================================================%
+	\begin{frame}[fragile]
+		
+		\frametitle{Ordinal Logistic Regression with \texttt{R}}
+		\Large
+		
+		Because the relationship between all pairs of groups is the same, there is only one set of coefficients. If this was not the case, we would need different sets of coefficients in the model to describe the relationship between each pair of outcome groups. Thus, in order to asses the appropriateness of our model, we need to evaluate whether the proportional odds assumption is tenable.
+		
+	\end{frame}
+	%================================================================================================%
+	\begin{frame}[fragile]
+		
+		\frametitle{Ordinal Logistic Regression with \texttt{R}}
+		\Large
+		Statistical tests to do this are available in some software packages. However, these tests have been criticized for having a tendency to reject the null hypothesis (that the sets of coefficients are the same), and hence, indicate that there the parallel slopes assumption does not hold, in cases where the assumption does hold (see Harrell 2001 p. 335). We were unable to locate a facility in R to perform any of the tests commonly used to test the parallel slopes assumption.
+		
+	\end{frame}
+	%================================================================================================%
+	\begin{frame}[fragile]
+		
+		\frametitle{Ordinal Logistic Regression with \texttt{R}}
+		\Large
+		
+		However, Harrell does recommend a graphical method for assessing the parallel slopes assumption. The values displayed in this graph are essentially (linear) predictions from a logit model, used to model the probability that y is greater than or equal to a given value (for each level of y), using one predictor (x) variable at a time. In order create this graph, you will need the Hmisc library.
+	\end{frame}
+\end{document}

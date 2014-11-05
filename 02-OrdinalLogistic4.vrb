@@ -1,4 +1,5 @@
-\frametitle{Ordered logistic regression \texttt{R} }
+
+\frametitle{Ordinal Logistic Regression with \texttt{R}}
 \Large
-\textbf{Pseudo-R-squared: }There is no exact analog of the R-squared found in OLS. There are many versions of pseudo-R-squares. Please see Long and Freese 2005 for more details and explanations of various pseudo-R-squares.
-\textbf{Diagnostics:} Doing diagnostics for non-linear models is difficult, and ordered logit/probit models are even more difficult than binary models.
+
+By default, summary will calculate the mean of the left side variable. So, if we had used the code summary(as.numeric(apply) ~ pared + public + gpa) without the fun argument, we would get means on apply by pared, then by public, and finally by gpa broken up into 4 equal groups. However, we can override calculation of the mean by supplying our own function, namely sf to the fun= argument. The final command asks R to return the contents to the object s, which is a table.
