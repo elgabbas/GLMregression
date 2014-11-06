@@ -1,4 +1,4 @@
-p <- read.csv("http://www.ats.ucla.edu/stat/data/poisson_sim.csv")
+p <- read.csv("poissonreg.csv")
 p <- within(p, {
   prog <- factor(prog, levels=1:3, labels=c("General", "Academic", "Vocational"))
   id <- factor(id)
