@@ -1,17 +1,6 @@
 \documentclass[00-GLMregslides.tex]{subfiles}
 \begin{document}
 
-	
-	%================================================== %	
-	\begin{frame}[fragile]
-		\frametitle{Multinomial Regression}
-		
-		\begin{verbatim}
-		
-		
-		
-		\end{verbatim}	
-	\end{frame}
 %================================================== %
 \begin{frame}
 Regarding your data, what you have is a response with multiple categories, and anytime you are trying to model a response which is categorical you are right to try and use some type of generalized linear model (GLM). In your case you have additional information which you must take into account regarding your response and that is that your response levels have a natural ordering good > middle > bad, notice how this is different from trying to model a response such as what color balloon someone is likely to buy (red/blue/green), these values have no natural ordering. When doing this type of model with an ordered response you may want to consider using a proportional odds model.
@@ -33,7 +22,11 @@ Any time you have a covariate which is categorical (Race/Sex/Hair color) you wan
 \end{frame}
 %================================================== %
 \begin{frame}
-Missing values can sometimes be a hassle to deal with but if you're doing a fairly basic analysis its probably safe to just remove data rows which contain missing values (this isn't always true, but based on your current experience level I'm guessing you need not be concerned with the specifics of when and how to deal with missing values). In fact this is pretty much what R does. If you have a data which you are using to model, if you are missing information in a row for your response or any covariate in the model R is just going to exclude this data (this is the warning your seeing). 
+Missing values can sometimes be a hassle to deal with but if you're doing a fairly basic analysis its probably safe to just remove data rows which contain missing values (this isn't always true, but based on your current experience level I'm guessing you need not be concerned with the specifics of when and how to deal with missing values). 
+\end{frame}
+%================================================== %
+\begin{frame}
+	In fact this is pretty much what R does. If you have a data which you are using to model, if you are missing information in a row for your response or any covariate in the model R is just going to exclude this data (this is the warning your seeing). 
 \end{frame}
 %================================================== %
 \begin{frame}
@@ -41,7 +34,12 @@ Obviously if you're excluding a large proportion of your data due to missingness
 \end{frame}
 %================================================== %
 \begin{frame}
-Almost all R model objects (lm, glm, lrm,...) will have an associated predict() function which will allow you to calculate the predicted values for your current modeling dataset and additionally for another dataset which you wish to predict an outcome for. Just search ?predict.glm or ?predict.lm to try and get some more info for whatever model type you want to work with. This is a very typical thing people wish to do with models so rest assured that there are some built in functions and methods that should make doing this relatively straightforward.
+Almost all R model objects (lm, glm, lrm,...) will have an associated predict() function which will allow you to calculate the predicted values for your current modeling dataset and additionally for another dataset which you wish to predict an outcome for. 
+
+\end{frame}
+%================================================== %
+\begin{frame}
+Just search ?predict.glm or ?predict.lm to try and get some more info for whatever model type you want to work with. This is a very typical thing people wish to do with models so rest assured that there are some built in functions and methods that should make doing this relatively straightforward.
 
 \end{frame}
 	

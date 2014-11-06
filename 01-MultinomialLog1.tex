@@ -9,25 +9,30 @@
 \begin{frame}
 \Large
 	
-
-
-Multinomial logistic regression is used to model nominal outcome variables, in which the log odds of the outcomes are modeled as a linear combination of the predictor variables.
-
+\textbf{Multinomial Logistic Regression}\\
+\bigskip
+\begin{itemize}
+\item Multinomial logistic regression is used to model nominal outcome variables, in which the log odds of the outcomes are modeled as a linear combination of the predictor variables.
+\end{itemize}
  
 \end{frame}
 
 %================================================================================================%
 \begin{frame}[fragile]
 
-This page uses the following packages. Make sure that you can load them before trying to run the examples on this page. If you do not have a package installed, run: install.packages("packagename"), or if you see the version is out of date, run: update.packages().
+\frametitle{Multinomial Regression with \texttt{R}}
+\Large
+The main package we will use is the \textbf{\textit{nnet}} package. We will also use the \textbf{\textit{ggplot2}} and \textbf{\textit{reshape2}} package. 
+% Make sure that you can load them before trying to run the examples on this page.
+% If you do not have a package installed, run: install.packages("packagename"), or if you see the version is out of date, run: update.packages().
 
 \begin{framed}
 \begin{verbatim}
+install.packages("nnet")
+library(nnet)
 
-require(foreign)
-require(nnet)
-require(ggplot2)
-require(reshape2)
+library(ggplot2)
+library(reshape2)
 \end{verbatim}
 \end{framed}
 
@@ -40,7 +45,32 @@ require(reshape2)
 % In particular, it does not cover data cleaning and checking, verification of assumptions, model diagnostics or potential follow-up analyses. 
 
 \end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Examples of multinomial logistic regression}
+	
+	\begin{description}
 
+		
+		\item[Example 1.] Entering high school students make program choices among general program, vocational program and academic program. Their choice might be modeled using their writing score and their social economic status.
+	\end{description}
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Examples of multinomial logistic regression}
+	
+	\begin{description}
+		\item[Example 2.] People's occupational choices might be influenced by their parents' occupations and their own education level. We can study the relationship of one's occupation choice with education level and father's occupation. The occupational choices will be the outcome variable which consists of categories of occupations. 
+		
+
+	\end{description}
+\end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
@@ -48,75 +78,98 @@ require(reshape2)
 \Large
 \textbf{Examples of multinomial logistic regression}
 
-Example 1. People's occupational choices might be influenced by their parents' occupations and their own education level. We can study the relationship of one's occupation choice with education level and father's occupation. The occupational choices will be the outcome variable which consists of categories of occupations. 
+\begin{description}
 
-Example 2. A biologist may be interested in food choices that alligators make. Adult alligators might have different preferences from young ones. The outcome variable here will be the types of food, and the predictor variables might be size of the alligators and other environmental variables.
+\item[Example 3.] A biologist may be interested in food choices that alligators make. Adult alligators might have different preferences from young ones. The outcome variable here will be the types of food, and the predictor variables might be size of the alligators and other environmental variables.
  
-Example 3. Entering high school students make program choices among general program, vocational program and academic program. Their choice might be modeled using their writing score and their social economic status.
 
+\end{description}
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
+\Large
+\textbf{Description of the Data}
+ 
+We will use the third example using the \textit{multilog} data set (or \textit{ml}).
 
-\textbf{Description of the data}
- 
-For our data analysis example, we will expand the third example using the hsbdemo data set. Let's first read in the data.
- 
+% Let's first read in the data.
+
+\begin{framed}
 \begin{verbatim}
 
-ml <- read.dta("http://www.ats.ucla.edu/stat/data/hsbdemo.dta")
+ml <- read.csv("multilog.csv",header=T)
 \end{verbatim}
+\end{framed}
  
-The data set contains variables on 200 students. The outcome variable is prog, program type. The predictor variables are social economic status, ses, a three-level categorical variable and writing score, write, a continuous variable. Let's start with getting some descriptive statistics of the variables of interest.
+ 
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+\Large	
+	\textbf{Description of the Data}
+\begin{itemize}
+\item The outcome variable is \textbf{prog}, program type. 
+\item The two predictor variables are
+\end{itemize}
+{ \Large
+\begin{enumerate}
+ \item social economic status, \textbf{ses}, (a three-level categorical variable) 
+ \item writing score, \textbf{write}, (a continuous variable).
+\end{enumerate} 
+}
+\begin{itemize}
+\item The data set contains variables on 200 students.
+\end{itemize}
+% Let's start with getting some descriptive statistics of the variables of interest.
 \end{frame} 
 %================================================================================================%
 \begin{frame}[fragile]
-
+\Large
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
 
+\begin{verbatim}
+table(ml$ses, ml$prog)
 
-with(ml, table(ses, prog))
+       general academic vocation
+low         16       19       12
+middle      20       44       31
+high         9       42        7
+\end{verbatim} 
  
-         prog
- ses      general academic vocation
-   low         16       19       12
-   middle      20       44       31
-   high         9       42        7
- 
-with(ml, do.call(rbind, tapply(write, prog, function(x) c(M = mean(x), SD = sd(x)))))
- 
+% with(ml, do.call(rbind, tapply(write, prog, function(x) c(M = mean(x), SD = sd(x)))))
+\begin{verbatim} 
               M    SD
  general  51.33 9.398
  academic 56.26 7.943
  vocation 46.76 9.319
- 
+\end{verbatim} 
 
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
-Analysis methods you might consider
-\begin{itemize}
-\item Multinomial logistic regression, the focus of this page. 
-\item Multinomial probit regression, similar to multinomial logistic regression with independent normal error terms.
-\item Multiple-group discriminant function analysis. A multivariate method for multinomial outcome variables
-\item Multiple logistic regression analyses, one for each pair of outcomes: One problem with this approach is that each analysis is potentially run on a different sample. The other problem is that without constraining the logistic models, we can end up with the probability of choosing all possible outcome categories greater than 1.
-\end{itemize}
-\end{frame}
+%\begin{frame}[fragile]
+%
+%\frametitle{Multinomial Regression with \texttt{R}}
+%\Large
+%Analysis methods you might consider
+%\begin{itemize}
+%\item Multinomial logistic regression, the focus of this page. 
+%\item Multinomial probit regression, similar to multinomial logistic regression with independent normal error terms.
+%\item Multiple-group discriminant function analysis. A multivariate method for multinomial outcome variables
+%\item Multiple logistic regression analyses, one for each pair of outcomes: One problem with this approach is that each analysis is potentially run on a different sample. The other problem is that without constraining the logistic models, we can end up with the probability of choosing all possible outcome categories greater than 1.
+%\end{itemize}
+%\end{frame}
 %================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
-\begin{itemize}
-\item Collapsing number of categories to two and then doing a logistic regression: This approach suffers from loss of information and changes the original research questions to very different ones. 
-\item Ordinal logistic regression: If the outcome variable is truly ordered and if it also satisfies the assumption of proportional odds, then switching to ordinal logistic regression will make the model more parsimonious.
-\item Alternative-specific multinomial probit regression, which allows different error structures therefore allows to relax the IIA assumption. This requires that the data structure be choice-specific.
-\item Nested logit model, another way to relax the IIA assumption, also requires the data structure be choice-specific. 
-\end{itemize}
-\end{frame}
+%\begin{frame}[fragile]
+%
+%\frametitle{Multinomial Regression with \texttt{R}}
+%\Large
+%\begin{itemize}
+%\item Collapsing number of categories to two and then doing a logistic regression: This approach suffers from loss of information and changes the original research questions to very different ones. 
+%\item Ordinal logistic regression: If the outcome variable is truly ordered and if it also satisfies the assumption of proportional odds, then switching to ordinal logistic regression will make the model more parsimonious.
+%\item Alternative-specific multinomial probit regression, which allows different error structures therefore allows to relax the IIA assumption. This requires that the data structure be choice-specific.
+%\item Nested logit model, another way to relax the IIA assumption, also requires the data structure be choice-specific. 
+%\end{itemize}
+%\end{frame}
 \end{document}
 %================================================================================================%

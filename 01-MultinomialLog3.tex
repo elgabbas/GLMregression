@@ -11,23 +11,32 @@
 
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
 \begin{itemize}
 \item The ratio of the probability of choosing one outcome category over the probability of choosing the baseline category is often referred as 
-relative risk (and it is also sometimes referred as odds as we have just used to described the regression parameters above). 
-\item  The relative risk is the right-hand side linear equation exponentiated, leading to the fact that the 
+\textbf{\textit{relative risk}} 
+\item It is also sometimes referred as \textbf{\textit{odds}}
+% as we have just used to described the regression parameters above previously). 
+
+\end{itemize}
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+\frametitle{Multinomial Logistic Regression with \texttt{R}}	\Large
+	\begin{itemize}
+\item  The relative risk is the (right-hand side) linear equation exponentiated, leading to the fact that the 
 exponentiated regression coefficients are relative risk ratios for a unit change in the predictor variable. 
-\item  We can exponentiate the coefficients from our model to see these risk ratios. 
+\item  We can exponentiate the coefficients from our model to see these risk ratios (next slide). 
 \end{itemize}
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
+\large
 
-extract the coefficients from the model and exponentiate
+\textit{Extract the coefficients from the model then and exponentiate}
 \begin{framed}
 \begin{verbatim}
 exp(coef(test))
@@ -44,8 +53,8 @@ exp(coef(test))
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
 \begin{itemize}
-\item The relative risk ratio for a one-unit increase in the variable write is .9437 for being in general program vs. academic program. 
-\item The relative risk ratio switching from ses = 1 to 3 is .3126 for being in general program vs. academic program. 
+\item The relative risk ratio for a one-unit increase in the variable \textbf{\textit{write}} is 0.9437 for being in general program vs. academic program. 
+\item The relative risk ratio switching from \textbf{\textit{ses}} = 1 to 3 is 0.3126 for being in general program vs. academic program. 
 \end{itemize}
 \end{frame}
 %================================================================================================%
@@ -55,7 +64,7 @@ exp(coef(test))
 \Large
 \begin{itemize}
 \item You can also use predicted probabilities to help you understand the model. 
-\item You can calculate predicted probabilities for each of our outcome levels using the fitted function. 
+\item You can calculate predicted probabilities for each of our outcome levels using the \texttt{fitted} function. 
 \item We can start by generating the predicted probabilities for the observations in our dataset and viewing the first few rows
 \end{itemize}
 \end{frame}
@@ -75,14 +84,26 @@ head(pp <- fitted(test))
  5   0.1001  0.1689   0.7309
  6   0.3534  0.2378   0.4088
 \end{verbatim} 
-Next, if we want to examine the changes in predicted probability associated with one of our two variables, we can create small datasets varying one 
-variable while holding the other constant. We will first do this holding write at its mean and examining the predicted probabilities for each level of ses.
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+\textbf{Prediction}
+\begin{itemize}
+\item Suppose we want to examine the changes in predicted probability associated with one of our two variables, we can create small datasets varying one 
+variable while holding the other constant. 
+\item We will first do this holding \textbf{\textit{write}} at its mean and examining the predicted probabilities for each level of \textbf{\textit{ses}}.
+\item Three Cases
+\end{itemize}
+
  
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
 \begin{verbatim}
 dses <- data.frame(ses = c("low", "middle", "high"), write = mean(ml$write))
@@ -97,42 +118,49 @@ predict(test, newdata = dses, "probs")
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
-Another way to understand the model using the predicted probabilities is to look at the averaged predicted probabilities for different values 
-of the continuous predictor variable write within each level of ses.
+\begin{itemize}
+\item Another way to understand the model using the predicted probabilities is to look at the averaged predicted probabilities for different values 
+of the continuous predictor variable \textbf{\textit{write}} within each level of \textbf{\textit{ses}}.
+\end{itemize}
+
  
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
+\large
+Store the predicted probabilities for each value of ses and write
 \begin{verbatim}
-dwrite <- data.frame(ses = rep(c("low", "middle", "high"), each = 41), write = rep(c(30:70),
-    3))
+dwrite <- data.frame(
+  ses = rep(c("low", "middle", "high"), each = 41),
+  write = rep(c(30:70), 3))
 
- store the predicted probabilities for each value of ses and write
-pp.write <- cbind(dwrite, predict(test, newdata = dwrite, type = "probs", se = TRUE))
+
+pp.write <- cbind(dwrite, 
+     predict(test, newdata = dwrite, 
+     type = "probs", se = TRUE))
 \end{verbatim}
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
- calculate the mean probabilities within each level of ses
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
+\large
+ Calculate the mean probabilities within each level of ses
 \begin{verbatim}
 by(pp.write[, 3:5], pp.write$ses, colMeans)
  
  pp.write$ses: high
  academic  general vocation 
    0.6164   0.1808   0.2028 
- -------------------------------------------------------- 
+ --------------------------------------
  pp.write$ses: low
  academic  general vocation 
    0.3973   0.3278   0.2749 
- -------------------------------------------------------- 
+ --------------------------------------
  pp.write$ses: middle
  academic  general vocation 
    0.4256   0.2011   0.3733
@@ -144,19 +172,21 @@ by(pp.write[, 3:5], pp.write$ses, colMeans)
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
 \begin{itemize}
-\item Sometimes, a couple of plots can convey a good deal amount of information. 
-\item Using the predictions we generated for the pp.write object above, we can plot the predicted probabilities against the writing score by the level 
-of ses for different levels of the outcome variable.
+\item A couple of plots can convey a good deal amount of information. 
+\item Using the predictions we generated for the \texttt{pp.write} object above, we can plot the predicted probabilities against the writing score by the level 
+of \textbf{\textit{ses}} for different levels of the outcome variable.
 \end{itemize} 
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
- melt data set to long for ggplot2
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
+\large
+remark: melt data set to long for ggplot2
 \begin{verbatim}
-lpp <- melt(pp.write, id.vars = c("ses", "write"), value.name = "probability")
+lpp <- melt(pp.write, id.vars = c("ses", "write"),
+            value.name = "probability")
+ 
 head(lpp)  # view first few rows
  
    ses write variable probability
@@ -188,8 +218,29 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
 \Large
 \textbf{Things to consider}
 \begin{itemize}
-\item The Independence of Irrelevant Alternatives (IIA) assumption: Roughly, the IIA assumption means that adding or deleting alternative outcome categories does not affect the odds among the remaining outcomes. There are alternative modeling methods, such as alternative-specific multinomial probit model, or nested logit model to relax the IIA assumption.
-\item Diagnostics and model fit: Unlike logistic regression where there are many statistics for performing model diagnostics, it is not as straightforward to do diagnostics with multinomial logistic regression models. For the purpose of detecting outliers or influential data points, one can run separate logit models and use the diagnostics tools on each model. 
+\item The Independence of Irrelevant Alternatives (IIA) assumption: Roughly, the IIA assumption means that adding or deleting alternative outcome categories does not affect the odds among the remaining outcomes. \item There are alternative modeling methods, such as alternative-specific multinomial probit model, or nested logit model to relax the IIA assumption.
+\end{itemize}
+
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Things to consider}
+	\begin{itemize}
+		\item Diagnostics and model fit: Unlike logistic regression where there are many statistics for performing model diagnostics, it is not as straightforward to do diagnostics with multinomial logistic regression models.
+\end{itemize}
+
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Things to consider}
+	\begin{itemize}
+\item For the purpose of detecting outliers or influential data points, one can run separate logit models and use the diagnostics tools on each model. 
 \item Sample size: Multinomial regression uses a maximum likelihood estimation method, it requires a large sample size. It also uses multiple equations. This implies that it requires an even larger sample size than ordinal or binary logistic regression.
 \end{itemize}
 
@@ -202,7 +253,27 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
 \textbf{Things to consider}
 \begin{itemize}
 \item Complete or quasi-complete separation: Complete separation means that the outcome variable separate a predictor variable completely, leading perfect prediction by the predictor variable.
+\end{itemize}
+
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Things to consider}
+	\begin{itemize}
 \item Perfect prediction means that only one value of a predictor variable is associated with only one value of the response variable. But you can tell from the output of the regression coefficients that something is wrong. You can then do a two-way tabulation of the outcome variable with the problematic variable to confirm this and then rerun the model without the problematic variable.
+\end{itemize}
+
+\end{frame}
+%================================================================================================%
+\begin{frame}[fragile]
+	
+	\frametitle{Multinomial Regression with \texttt{R}}
+	\Large
+	\textbf{Things to consider}
+	\begin{itemize}
 \item Empty cells or small cells: You should check for empty or small cells by doing a cross-tabulation between categorical predictors and the outcome variable. If a cell has very few cases (a small cell), the model may become unstable or it might not even run at all.
 \end{itemize}
 

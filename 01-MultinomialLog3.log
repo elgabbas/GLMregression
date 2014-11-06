@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.12)  4 NOV 2014 23:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.12)  5 NOV 2014 22:21
 entering extended mode
 **01-MultinomialLog3.tex
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.tex
@@ -959,10 +959,12 @@ line 5.
 cmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
-))
-Overfull \vbox (17.17961pt too high) detected at line 23
- []
+)
 
+LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
+(Font)              using `OT1/cmss/bx/n' instead on input line 6.
+
+)
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 (Font)              size <5> substituted on input line 23.
@@ -973,22 +975,7 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [1
 
 {C:/Users/Kevin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
-Overfull \hbox (52.36958pt too wide) in paragraph at lines 10--10
-[]          \OT1/cmtt/m/n/14.4 (Intercept) sesmiddle seshigh  write[] 
- []
-
-
-Overfull \hbox (52.36958pt too wide) in paragraph at lines 11--11
-[] \OT1/cmtt/m/n/14.4 general        17.33    0.5867  0.3126 0.9437[] 
- []
-
-
-Overfull \hbox (52.36958pt too wide) in paragraph at lines 12--12
-[] \OT1/cmtt/m/n/14.4 vocation      184.61    1.3383  0.3743 0.8926[] 
- []
-
-)
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [2
@@ -1007,22 +994,12 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
 ]
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
-Overfull \vbox (62.9796pt too high) detected at line 81
- []
-
-
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [5
 
 ]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
-Overfull \hbox (255.86925pt too wide) in paragraph at lines 5--5
-[]\OT1/cmtt/m/n/14.4 dses <- data.frame(ses = c("low", "middle", "high"), write
- = mean(ml$write))[] 
- []
-
-)
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [6
@@ -1035,21 +1012,9 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
 ]
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
-Overfull \hbox (374.42906pt too wide) in paragraph at lines 5--5
-[]\OT1/cmtt/m/n/14.4 dwrite <- data.frame(ses = rep(c("low", "middle", "high"),
- each = 41), write = rep(c(30:70),[] 
- []
-
-
-Overfull \hbox (181.76936pt too wide) in paragraph at lines 8--8
-[] \OT1/cmtt/m/n/14.4 store the predicted probabilities for each value of ses a
-nd write[] 
- []
-
-
-Overfull \hbox (322.55914pt too wide) in paragraph at lines 9--9
-[]\OT1/cmtt/m/n/14.4 pp.write <- cbind(dwrite, predict(test, newdata = dwrite, 
-type = "probs", se = TRUE))[] 
+Overfull \hbox (255.86925pt too wide) in paragraph at lines 5--5
+[]\OT1/cmtt/m/n/14.4 dses <- data.frame(ses = c("low", "middle", "high"), write
+ = mean(ml$write))[] 
  []
 
 )
@@ -1058,49 +1023,44 @@ Overfull \vbox (11.5pt too high) has occurred while \output is active []
  [8
 
 ]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
-Overfull \hbox (11.33963pt too wide) in paragraph at lines 6--6
-[]\OT1/cmtt/m/n/14.4 by(pp.write[, 3:5], pp.write$ses, colMeans)[] 
- []
-
-
-Overfull \hbox (115.07947pt too wide) in paragraph at lines 11--11
-[] \OT1/cmtt/m/n/14.4 --------------------------------------------------------[
-] 
- []
-
-
-Overfull \hbox (115.07947pt too wide) in paragraph at lines 15--15
-[] \OT1/cmtt/m/n/14.4 --------------------------------------------------------[
-] 
- []
-
-)
-Overfull \vbox (56.17961pt too high) detected at line 140
- []
-
-
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
  [9
 
 ]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
-Overfull \vbox (11.5pt too high) has occurred while \output is active []
-
- [10
-
-]
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
-Overfull \hbox (270.68922pt too wide) in paragraph at lines 6--6
-[]\OT1/cmtt/m/n/14.4 lpp <- melt(pp.write, id.vars = c("ses", "write"), value.n
-ame = "probability")[] 
+Overfull \hbox (7.63528pt too wide) in paragraph at lines 7--7
+[]  \OT1/cmtt/m/n/12 ses = rep(c("low", "middle", "high"), each = 41),[] 
  []
 
 )
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
+ [10
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
  [11
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [12
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
+Overfull \hbox (1.46028pt too wide) in paragraph at lines 6--6
+[]\OT1/cmtt/m/n/12 lpp <- melt(pp.write, id.vars = c("ses", "write"),[] 
+ []
+
+)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [13
 
 ]
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb
@@ -1112,38 +1072,54 @@ Overfull \hbox (404.06902pt too wide) in paragraph at lines 7--7
 )
 Overfull \vbox (11.5pt too high) has occurred while \output is active []
 
- [12
-
-]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
-Overfull \vbox (195.9796pt too high) detected at line 196
- []
-
-
-Overfull \vbox (11.5pt too high) has occurred while \output is active []
-
- [13
-
-]
-(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
-Overfull \vbox (159.9796pt too high) detected at line 209
- []
-
-
-Overfull \vbox (11.5pt too high) has occurred while \output is active []
-
  [14
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [15
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [16
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [17
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [18
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [19
+
+]
+(C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.vrb)
+Overfull \vbox (11.5pt too high) has occurred while \output is active []
+
+ [20
 
 ]
 \tf@nav=\write6
 \tf@toc=\write7
 \tf@snm=\write8
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 211.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 211.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 282.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 282.
 
 (C:\Users\Kevin\Documents\GitHub\GLMregression\01-MultinomialLog3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 211.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 211.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 282.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 282.
 Package rerunfilecheck Info: File `01-MultinomialLog3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1151,23 +1127,27 @@ Package rerunfilecheck Info: File `01-MultinomialLog3.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
  ) 
 Here is how much of TeX's memory you used:
- 16423 strings out of 493921
- 318775 string characters out of 3144875
+ 16452 strings out of 493921
+ 319777 string characters out of 3144875
  380404 words of memory out of 3000000
- 19270 multiletter control sequences out of 15000+200000
- 10245 words of font info for 38 fonts, out of 3000000 for 9000
+ 19274 multiletter control sequences out of 15000+200000
+ 11080 words of font info for 41 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 64i,14n,57p,461b,549s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,14n,57p,469b,549s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb
->
-Output written on 01-MultinomialLog3.pdf (14 pages, 121187 bytes).
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssi12.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+
+Output written on 01-MultinomialLog3.pdf (20 pages, 164450 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
+ 549 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

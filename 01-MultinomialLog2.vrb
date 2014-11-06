@@ -2,8 +2,6 @@
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
 \begin{itemize}
-\item The log odds of being in general program vs. in academic program will decrease by 1.163 if moving from ses="low" to ses="high"(b\_12).
-\item The log odds of being in general program vs. in academic program will decrease by 0.533 if moving from ses="low"to ses="middle"(b\_11), although this coefficient is not significant.
 \item The log odds of being in vocation program vs. in academic program will decrease by 0.983 if moving from ses="low" to ses="high"(b\_22).
 \item The log odds of being in vocation program vs. in academic program will increase by 0.291 if moving from ses="low" to ses="middle"(b\_21), although this coefficient is not signficant.
 \end{itemize}

@@ -4,31 +4,50 @@
 	
 %====================================================== %
 \begin{frame}
+	\frametitle{Ordered Logistic Regression \texttt{R} }
 	\Large
-We can also get confidence intervals for the parameter estimates. These can be obtained either by profiling the likelihood function or by using the standard errors and assuming a normal distribution. Note that profiled CIs are not symmetric (although they are usually close to symmetric). If the 95\% CI does not cross 0, the parameter estimate is statistically significant.
+	\begin{itemize}
+\item We can also get confidence intervals for the parameter estimates. 
+\item These can be obtained either by profiling the likelihood function or by using the standard errors and assuming a normal distribution.
+\item Note that profiled CIs are not symmetric (although they are usually close to symmetric). 
+\item If the 95\% CI does not cross 0, the parameter estimate is statistically significant.
+\end{itemize}
 \end{frame}
 %====================================================== %
 \begin{frame}[fragile]
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\Large
 	\begin{verbatim}
 (ci <- confint(m)) 
 # default method gives profiled CIs
+
  Waiting for profiling to be done...
-          2.5 % 97.5 %
- pared   0.5282 1.5722
- public -0.6522 0.5191
- gpa     0.1076 1.1309
+          2.5 %   97.5 %
+ pared   0.5282   1.5722
+ public -0.6522   0.5191
+ gpa     0.1076   1.1309
+\end{verbatim}
+\end{frame}
+%====================================================== %
+\begin{frame}[fragile]
+\frametitle{Ordered Logistic Regression \texttt{R} }
+\Large
+\begin{verbatim}
 confint.default(m) # CIs assuming normality
-          2.5 % 97.5 %
- pared   0.5268  1.569
- public -0.6426  0.525
- gpa     0.1051  1.127
+
+           2.5 %   97.5 %
+ pared    0.5268    1.569
+ public  -0.6426    0.525
+ gpa      0.1051    1.127
 \end{verbatim}
 \end{frame}
 %====================================================== %
 \begin{frame}
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\Large
 \textbf{Confidence Intervals}
 \begin{itemize}
-\item The CIs for both pared and gpa do not include 0; public does. 
+\item The CIs for both pared and gpa do not include 0; but the CI for public does. 
 \item The estimates in the output are given in units of ordered logits, or ordered log odds. 
 \item So for pared, we would say that for a one unit increase in pared (i.e., going from 0 to 1), we expect a 1.05 
 increase in the expect value of apply on the log odds scale, given all of the other variables in the model are held constant. 
@@ -36,6 +55,8 @@ increase in the expect value of apply on the log odds scale, given all of the ot
 \end{frame}
 %====================================================== %
 \begin{frame}
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\Large
 \textbf{Confidence Intervals}
 \begin{itemize}
 \item For gpa, we would say that for a one unit increase in gpa, we would expect a 0.62 increase in the expected value of 
@@ -44,7 +65,8 @@ apply in the log odds scale, given that all of the other variables in the model 
 \end{frame}
 %====================================================== %
 \begin{frame}
-
+	\frametitle{Ordered Logistic Regression \texttt{R} }
+	\Large
 \begin{itemize}
 \item  The coefficients from the model can be somewhat difficult to interpret because they are scaled in terms of logs. 
 \item Another way to interpret logistic regression models is to convert the coefficients into odds ratios. 
@@ -53,12 +75,16 @@ apply in the log odds scale, given that all of the other variables in the model 
 \end{frame}
 %====================================================== %
 \begin{frame}[fragile]
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\large
 \textbf{Odds Ratios}
 	\begin{verbatim}
 
 exp(coef(m))
   pared public    gpa 
  2.8511 0.9429 1.8514
+ 
+ 
  # Odds Ratios and CIs
 exp(cbind(OR = coef(m), ci))
             OR  2.5 % 97.5 %
@@ -69,21 +95,25 @@ exp(cbind(OR = coef(m), ci))
 \end{frame}
 %====================================================== %
 \begin{frame}
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\Large
 \begin{itemize}
 \item These coefficients are called \textbf{proportional odds ratios} and we would interpret these pretty much as 
 we would odds ratios from a binary logistic regression. 
-\item For pared, we would say that for a one unit increase in parental education, i.e., going from 0 (Low) to 1 (High), 
-the odds of "very likely" applying versus "somewhat likely" or "unlikely" applying combined are 2.85 greater, 
+\item For pared, we would say that for a one unit increase in parental education, i.e., going from 0 (\textit{Low}) to 1 (\textit{High}), 
+the odds of "\textit{very likely}" applying versus "\textit{somewhat likely}" or "\textit{unlikely}" applying combined are 2.85 greater, 
 given that all of the other variables in the model are held constant. 
 \end{itemize}
 \end{frame}
 %====================================================== %
 \begin{frame}
+		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\Large
 \begin{itemize}
-\item Similarly, the odds "very likely" or "somewhat likely" applying versus "unlikely" applying is 2.85 times greater, 
+\item Similarly, the odds "\textit{very likely}" or "\textit{somewhat likely}" applying versus "\textit{unlikely}" applying is 2.85 times greater, 
 given that all of the other variables in the model are held constant.
 \item For gpa (and other continuous variables), the interpretation is that when a student's gpa moves 1 unit, 
-the odds of moving from "unlikely" applying to "somewhat likely" or "very likley" applying (or from the lower and middle categories to the high category) are multiplied by 1.85.
+the odds of moving from "\textit{unlikely}" applying to "\textit{somewhat likely}" or "\textit{very likely}" applying (or from the lower and middle categories to the high category) are multiplied by 1.85.
 \end{itemize}
 \end{frame}
 \end{document}

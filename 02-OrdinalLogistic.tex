@@ -15,7 +15,7 @@
 \begin{itemize}
 \item In this section we will use the \texttt{polr} command (from the MASS package) to estimate an ordered logistic 
 regression model. 
-\item The command name comes from \textbf{\textit{proportional odds logistic regression}}, due to the the proportional odds assumption in our model. 
+\item The command name comes from \textbf{\textit{proportional odds logistic regression}}, due to the the \textbf{\textit{proportional odds assumption}} in the model. 
 \end{itemize}
 \end{frame}
 %================================================ %
@@ -24,19 +24,19 @@ regression model.
 	\Large
 \textbf{\texttt{polr}}
 \begin{itemize}
-\item \texttt{polr} uses the standard formula interface in R for specifying a regression model with outcome 
+\item \texttt{polr} uses the standard formula interface in \texttt{R} for specifying a regression model with outcome 
 followed by predictors. 
-\item We also specify \texttt{Hess=TRUE} to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
+\item We will also specify \texttt{Hess=TRUE} to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
 \end{itemize}
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
-	\large
+\frametitle{Ordered logistic regression \texttt{R} }
+\large
 \begin{framed}		
-	\begin{verbatim}
+\begin{verbatim}
 	
-	## fit ordered logit model and store results 'm'
+## fit ordered logit model and store results 'm'
 m <- polr(apply ~ pared + 
           public + gpa, data = dat, Hess=TRUE)
 
@@ -51,9 +51,8 @@ summary(m)
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
-	\large
-\begin{framed}		
-	\begin{verbatim}
+	\normalsize
+\begin{verbatim}
 Coefficients:
          Value Std. Error t value
 pared   1.0477      0.266   3.942
@@ -66,8 +65,7 @@ unlikely|somewhat likely     2.204  0.780      2.827
 somewhat likely|very likely  4.299  0.804      5.345 
 
 \end{verbatim}
-\end{framed}
- 
+
 % Residual Deviance: 717.02 
 % AIC: 727.02
 \end{frame}
@@ -78,7 +76,7 @@ somewhat likely|very likely  4.299  0.804      5.345
 \begin{itemize}
 \item[1] The ``Call", what type of model we ran, what options we specified, etc.
 \item[2] The usual regression output coefficient table including the value of each coefficient, standard errors, and 
-$t-$value, which is simply the ratio of the coefficient to its standard error. (Remark: There is no significance test by default.)
+$t-$value, which is simply the ratio of the coefficient to its standard error.\\ (Remark: There is no significance test by default.)
 \end{itemize}
 \end{frame}
 %================================================ %
@@ -87,9 +85,16 @@ $t-$value, which is simply the ratio of the coefficient to its standard error. (
 	\Large
 \begin{itemize}
 \item[3]	
-Next we see the estimates for the two intercepts, which are sometimes called cutpoints. 
+We then have the estimates for the two intercepts, which are sometimes called \textbf{\textit{cutpoints}}. 
 \item[4] The intercepts indicate where the latent variable is cut to make the three groups that we observe in our data. 
-Note that this latent variable is continuous. In general, these are not used in the interpretation of the results. The cutpoints are closely related to thresholds, which are reported by other statistical packages.
+\end{itemize}
+\end{frame}
+%================================================ %
+\begin{frame}[fragile]
+	\frametitle{Ordered logistic regression \texttt{R} }
+	\Large
+\begin{itemize}
+\item Note that this latent variable is continuous. In general, these are not used in the interpretation of the results. \item  The cutpoints are closely related to thresholds, which are reported by other statistical packages.
 \end{itemize}
 \end{frame}
 %================================================ %
@@ -100,7 +105,7 @@ Note that this latent variable is continuous. In general, these are not used in 
 \item Finally, we see the residual deviance, -2 * Log Likelihood of the model as well as the AIC. 
 \item Both the deviance and AIC are useful for model comparison.
 \item Some people are not satisfied without a $p-$value.
-\item One way to calculate a p-value in this case is by comparing the t-value against the standard normal distribution, like a z test. 
+\item One way to calculate a p-value in this case is by comparing the t-value against the standard normal distribution, like a $z-$test. 
 \end{itemize}
 \end{frame}
 %================================================ %
@@ -110,18 +115,18 @@ Note that this latent variable is continuous. In general, these are not used in 
 \begin{itemize}
 \item Of course this is only true with infinite degrees of freedom, but is reasonably approximated by large 
 samples, becoming increasingly biased as sample size decreases. 
-\item This approach is used in other software packages such as Stata and is trivial to do. 
+%\item This approach is used in other software packages such as Stata and is trivial to do. 
 \item First we store the coefficient table, then calculate the $p-$values and combine back with the table.
 \end{itemize}
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
-	\large
-\begin{framed}		
+\normalsize
+	
 	\begin{verbatim}
 		
- store table
+# store table
 (ctable <- coef(summary(m)))
                                 Value Std. Error t value
  pared                        1.04769     0.2658  3.9418
@@ -129,28 +134,31 @@ samples, becoming increasingly biased as sample size decreases.
  gpa                          0.61594     0.2606  2.3632
  unlikely|somewhat likely     2.20391     0.7795  2.8272
  somewhat likely|very likely  4.29936     0.8043  5.3453
- calculate and store p values
-p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
+ 
+ 
+
 \end{verbatim}
-\end{framed}
+
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
-	\large
-\begin{framed}		
+	\frametitle{Ordered Logistic regression \texttt{R} }
+\normalsize	
 	\begin{verbatim}
-		
- combined table
+# calculate and store p values
+p <- pnorm(abs(ctable[, "t value"]), 
+      lower.tail = FALSE) * 2
+
+# Combined table
 (ctable <- cbind(ctable, "p value" = p))
-                                Value Std. Error t value   p value
- pared                        1.04769     0.2658  3.9418 8.087e-05
- public                      -0.05879     0.2979 -0.1974 8.435e-01
- gpa                          0.61594     0.2606  2.3632 1.812e-02
- unlikely|somewhat likely     2.20391     0.7795  2.8272 4.696e-03
- somewhat likely|very likely  4.29936     0.8043  5.3453 9.027e-08
+                      Value Std. Error t value   p value
+ pared              1.04769     0.2658  3.9418 8.087e-05
+ public            -0.05879     0.2979 -0.1974 8.435e-01
+ gpa                0.61594     0.2606  2.3632 1.812e-02
+ unli..|some..      2.20391     0.7795  2.8272 4.696e-03
+ some..|very..      4.29936     0.8043  5.3453 9.027e-08
 \end{verbatim}
-\end{framed}
+
 \end{frame} 
 
 %================================================ %

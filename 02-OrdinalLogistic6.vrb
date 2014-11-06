@@ -1,4 +1,7 @@
 \frametitle{Ordered logistic regression \texttt{R} }
 \Large
 \textbf{Pseudo-R-squared: }There is no exact analog of the R-squared found in OLS. There are many versions of pseudo-R-squares. Please see Long and Freese 2005 for more details and explanations of various pseudo-R-squares.
+
+
+
 \textbf{Diagnostics:} Doing diagnostics for non-linear models is difficult, and ordered logit/probit models are even more difficult than binary models.

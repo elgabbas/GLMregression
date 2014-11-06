@@ -1,9 +1,21 @@
-
+\Large
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
-\begin{itemize}
-\item Collapsing number of categories to two and then doing a logistic regression: This approach suffers from loss of information and changes the original research questions to very different ones.
-\item Ordinal logistic regression: If the outcome variable is truly ordered and if it also satisfies the assumption of proportional odds, then switching to ordinal logistic regression will make the model more parsimonious.
-\item Alternative-specific multinomial probit regression, which allows different error structures therefore allows to relax the IIA assumption. This requires that the data structure be choice-specific.
-\item Nested logit model, another way to relax the IIA assumption, also requires the data structure be choice-specific.
-\end{itemize}
+
+\begin{verbatim}
+table(ml$ses, ml$prog)
+
+       general academic vocation
+low         16       19       12
+middle      20       44       31
+high         9       42        7
+\end{verbatim}
+
+% with(ml, do.call(rbind, tapply(write, prog, function(x) c(M = mean(x), SD = sd(x)))))
+\begin{verbatim}
+              M    SD
+ general  51.33 9.398
+ academic 56.26 7.943
+ vocation 46.76 9.319
+\end{verbatim}
+

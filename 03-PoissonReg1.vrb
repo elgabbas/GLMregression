@@ -1,4 +1,8 @@
-
 \frametitle{Poisson Regression with \texttt{R}}
-We can use the tapply function to display the summary statistics by program type. The table below shows the average numbers of awards by program type and seems to suggest that program type is a good candidate for predicting the number of awards, our outcome variable, because the mean value of the outcome appears to vary by prog. Additionally, the means and variances within each level of prog--the conditional means and variances--are similar. A conditional histogram separated out by program type is plotted to show the distribution.
+\Large
+\begin{itemize}
+\item Additionally, the means and variances within each level of prog--\textit{the conditional means and variances}--are similar.
+\item A conditional histogram separated out by program type is plotted to show the distribution.
+\end{itemize}
+
 

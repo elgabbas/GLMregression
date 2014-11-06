@@ -1,9 +1,13 @@
+\frametitle{Ordered Logistic Regression \texttt{R} }
+\large
 \textbf{Odds Ratios}
 \begin{verbatim}
 
 exp(coef(m))
   pared public    gpa
  2.8511 0.9429 1.8514
+
+
  # Odds Ratios and CIs
 exp(cbind(OR = coef(m), ci))
             OR  2.5 % 97.5 %
