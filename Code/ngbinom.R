@@ -1,4 +1,10 @@
-dat <- read.dta("http://www.ats.ucla.edu/stat/stata/dae/nb_data.dta")
+require(ggplot2)
+
+dat <- read.csv("negbin.csv")
+
+head(dat)
+#############################################################
+
 dat <- within(dat, {
     prog <- factor(prog, levels = 1:3, labels = c("General", "Academic", "Vocational"))
     id <- factor(id)
