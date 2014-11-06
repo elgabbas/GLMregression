@@ -3,7 +3,7 @@
 	%================================================ %
 	\begin{frame}[fragile]
 		\frametitle{Negative Binomial Regression with \texttt{R} }
-		\Large
+		\large
 		
 		\begin{framed}
 			\begin{verbatim}
@@ -43,7 +43,7 @@
 		%================================================ %
 		\begin{frame}[fragile]
 		\frametitle{Negative Binomial Regression with \texttt{R} }
-		\Large
+		\large
 		
 		\begin{framed}
 		\begin{verbatim}
@@ -61,7 +61,7 @@
 	%================================================ %
 	\begin{frame}[fragile]
 	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+	\large
 	
 	\begin{verbatim}
 		newdata2 <- cbind(newdata2, predict(m1, newdata2, type = "link", se.fit=TRUE))
@@ -96,7 +96,7 @@
 	\frametitle{Negative Binomial Regression with \texttt{R} }
 	\Large
 	
-	Plot of the model predicted days absent with confidence intervals
+	% Plot of the model predicted days absent with confidence intervals
 	The graph shows the expected count across the range of math scores, for each type of program along with 95 percent confidence intervals. Note that the lines are not straight because this is a log linear model, and what is plotted are the expected values, not the log of the expected values.
 \end{frame}
 
@@ -118,21 +118,34 @@
 \begin{frame}[fragile]
 	\frametitle{Negative Binomial Regression with \texttt{R} }
 	\Large
-	
+\begin{itemize}
+	\item	
 	If the data generating process does not allow for any 0s (such as the number of days spent in the hospital), then a zero-truncated model may be more appropriate.
+	\end{itemize}
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Negative Binomial Regression with \texttt{R} }
 	\Large
-	Count data often have an exposure variable, which indicates the number of times the event could have happened. This variable should be incorporated into your negative binomial regression model with the use of the offset option. See the glm documentation for details.
+	\begin{itemize}
+	\item
+	Count data often have an exposure variable, which indicates the number of times the event could have happened. 
+	\item This variable should be incorporated into your negative binomial regression model with the 
+	use of the offset option. 
+	%See the glm documentation for details.
+	\end{itemize}
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Negative Binomial Regression with \texttt{R} }
 	\Large
+		\begin{itemize}
+	\item
 	The outcome variable in a negative binomial regression cannot have negative numbers.
-	You will need to use the \texttt{m1\$resid} command to obtain the residuals from our model to check other assumptions of the negative binomial model (see Cameron and Trivedi (1998) and Dupont (2002) for more information).
+	\item You will need to use the \texttt{m1\$resid} command to obtain the residuals from our model to check 
+	other assumptions of the negative binomial model 
+	% (see Cameron and Trivedi (1998) and Dupont (2002) for more information).
+	\end{itemize}
 \end{frame}
 
 
