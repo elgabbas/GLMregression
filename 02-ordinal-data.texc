@@ -1,0 +1,83 @@
+
+
+
+
+
+%=========================================%
+\begin{frame}
+\textbf{Ordered Logistic Regression}
+Examples of ordered logistic regression
+\begin{itemize}
+\item A marketing research firm wants to investigate what factors influence the size of soda (small, medium, large or extra large) that 
+people order at a fast-food chain. 
+\item These factors may include what type of sandwich is ordered (burger or chicken), whether or not fries are also ordered, and age of the consumer. 
+\item While the outcome variable, size of soda, is obviously ordered, the difference between the various sizes is not consistent. 
+\item The differece between small and medium is 10 ounces, between medium and large 8, and between large and extra large 12.
+\end{itemize}
+\end{frame}
+%=========================================%
+\begin{frame}
+\textbf{Ordered Logistic Regression}
+Examples of ordered logistic regression
+\begin{itemize}
+\item A researcher is interested in what factors influence medaling in Olympic swimming. 
+\item Relevant predictors include at training hours, diet, age, and popularity of swimming in the athlete's home country. 
+\item The researcher believes that the distance between gold and silver is larger than the distance between silver and bronze.
+\end{itemize}
+\end{frame}
+%=========================================%
+\begin{frame}
+\textbf{Ordered Logistic Regression}
+
+\begin{itemize}
+\item 
+A study looks at factors that influence the decision of whether to apply to graduate school. 
+\item College juniors are asked if they are unlikely, somewhat likely, or very likely to apply to graduate school. 
+\item Hence, our outcome variable has three categories. Data on parental educational status, whether the undergraduate institution is public or private, 
+and current GPA is also collected. 
+\item The researchers have reason to believe that the "distances" between these three points are not equal. 
+\item For example, the "distance" between \textit{"unlikely"} and \textit{"somewhat likely"} may be shorter than the distance between \textit{"somewhat likely"} and \textit{"very likely"}.
+\end{itemize}
+\end{frame}
+%=========================================%
+\begin{frame}
+\textbf{Ordered Logistic Regression}
+Data Set - Graduate School Entry ( ologit.csv)
+\begin{itemize}
+\item 
+This hypothetical data set has a three level variable called \textbf{\textit{apply}}, with levels \textit{"unlikely"}, \textit{"somewhat likely"}, and \textit{"very likely"}, coded 1, 2, and 3, respectively, 
+that we will use as our outcome variable. 
+% We also have three variables that we will use as predictors: pared, which is a 0/1 variable indicating whether at least 
+% one parent has a graduate degree; public, which is a 0/1 variable where 1 indicates that the undergraduate institution is public and 0 private, and gpa, which is 
+% the student's grade point average. 
+% Let's start with the descriptive statistics of these variables.
+\end{itemize}
+\end{frame}
+%=========================================%
+\begin{frame}
+\textbf{Ordered Logistic Regression}
+Predictors:
+\begin{description}
+\item[pared], which is a 0/1 variable indicating whether at least 
+one parent has a graduate degree; 
+\item[public], which is a 0/1 variable where 1 indicates that the undergraduate institution is public and 0 private, 
+\item[gpa], which is 
+the student's grade point average. 
+% Let's start with the descriptive statistics of these variables.
+\end{description}
+\end{frame}
+%=========================================%
+\begin{frame}[fragile]
+
+\begin{verbatim}
+            apply pared public  gpa
+1     very likely     0      0 3.26
+2 somewhat likely     1      0 3.21
+3        unlikely     1      1 3.94
+4 somewhat likely     0      0 2.81
+5 somewhat likely     0      0 2.53
+6        unlikely     0      1 2.59
+\end{verbatim}
+\end{frame}
+
+\end{document}
