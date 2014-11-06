@@ -13,10 +13,11 @@
 
 \frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
+\textbf{Odds Ratios}
 \begin{itemize}
 \item The ratio of the probability of choosing one outcome category over the probability of choosing the baseline category is often referred as 
 \textbf{\textit{relative risk}} 
-\item It is also sometimes referred as \textbf{\textit{odds}}
+\item It is also sometimes referred as \textbf{\textit{odds}}.
 % as we have just used to described the regression parameters above previously). 
 
 \end{itemize}
@@ -27,7 +28,7 @@
 	\begin{itemize}
 \item  The relative risk is the (right-hand side) linear equation exponentiated, leading to the fact that the 
 exponentiated regression coefficients are relative risk ratios for a unit change in the predictor variable. 
-\item  We can exponentiate the coefficients from our model to see these risk ratios (next slide). 
+\item  We can exponentiate the coefficients from our model to see these odds ratios (next slide). 
 \end{itemize}
 \end{frame}
 %================================================================================================%
@@ -49,8 +50,7 @@ exp(coef(test))
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
+\frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
 \begin{itemize}
 \item The relative risk ratio for a one-unit increase in the variable \textbf{\textit{write}} is 0.9437 for being in general program vs. academic program. 
@@ -95,7 +95,7 @@ head(pp <- fitted(test))
 \item Suppose we want to examine the changes in predicted probability associated with one of our two variables, we can create small datasets varying one 
 variable while holding the other constant. 
 \item We will first do this holding \textbf{\textit{write}} at its mean and examining the predicted probabilities for each level of \textbf{\textit{ses}}.
-\item Three Cases
+\item \textit{(i.e. Three Cases to predict for) }
 \end{itemize}
 
  
@@ -106,7 +106,8 @@ variable while holding the other constant.
 \frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
 \begin{verbatim}
-dses <- data.frame(ses = c("low", "middle", "high"), write = mean(ml$write))
+dses <- data.frame(ses = c("low", "middle", "high"), 
+              write = mean(ml$write))
 predict(test, newdata = dses, "probs")
  
    academic general vocation
@@ -211,72 +212,4 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet
  
 \end{verbatim}
 \end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
-\textbf{Things to consider}
-\begin{itemize}
-\item The Independence of Irrelevant Alternatives (IIA) assumption: Roughly, the IIA assumption means that adding or deleting alternative outcome categories does not affect the odds among the remaining outcomes. \item There are alternative modeling methods, such as alternative-specific multinomial probit model, or nested logit model to relax the IIA assumption.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-	
-	\frametitle{Multinomial Regression with \texttt{R}}
-	\Large
-	\textbf{Things to consider}
-	\begin{itemize}
-		\item Diagnostics and model fit: Unlike logistic regression where there are many statistics for performing model diagnostics, it is not as straightforward to do diagnostics with multinomial logistic regression models.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-	
-	\frametitle{Multinomial Regression with \texttt{R}}
-	\Large
-	\textbf{Things to consider}
-	\begin{itemize}
-\item For the purpose of detecting outliers or influential data points, one can run separate logit models and use the diagnostics tools on each model. 
-\item Sample size: Multinomial regression uses a maximum likelihood estimation method, it requires a large sample size. It also uses multiple equations. This implies that it requires an even larger sample size than ordinal or binary logistic regression.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
-\textbf{Things to consider}
-\begin{itemize}
-\item Complete or quasi-complete separation: Complete separation means that the outcome variable separate a predictor variable completely, leading perfect prediction by the predictor variable.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-	
-	\frametitle{Multinomial Regression with \texttt{R}}
-	\Large
-	\textbf{Things to consider}
-	\begin{itemize}
-\item Perfect prediction means that only one value of a predictor variable is associated with only one value of the response variable. But you can tell from the output of the regression coefficients that something is wrong. You can then do a two-way tabulation of the outcome variable with the problematic variable to confirm this and then rerun the model without the problematic variable.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
-\begin{frame}[fragile]
-	
-	\frametitle{Multinomial Regression with \texttt{R}}
-	\Large
-	\textbf{Things to consider}
-	\begin{itemize}
-\item Empty cells or small cells: You should check for empty or small cells by doing a cross-tabulation between categorical predictors and the outcome variable. If a cell has very few cases (a small cell), the model may become unstable or it might not even run at all.
-\end{itemize}
-
-\end{frame}
-%================================================================================================%
 \end{document}
