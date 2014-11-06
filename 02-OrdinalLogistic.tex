@@ -47,6 +47,7 @@ regression model.
 \item The command name comes from \textbf{\textit{proportional odds logistic regression}}, due to the the \textbf{\textit{proportional odds assumption}} in the model. 
 \end{itemize}
 \end{frame}
+
 %================================================ %
 \begin{frame}[fragile]
 \frametitle{Ordered logistic regression with \texttt{R} }
@@ -58,6 +59,7 @@ followed by predictors.
 \item We will also specify \texttt{Hess=TRUE} to have the model return the observed information matrix from optimization (called the Hessian) which is used to get standard errors.
 \end{itemize}
 \end{frame}
+
 %================================================ %
 \begin{frame}[fragile]
 \frametitle{Ordered logistic regression with \texttt{R} }
@@ -78,6 +80,8 @@ summary(m)
 \end{verbatim}
 \end{framed}
 \end{frame}
+
+
 %================================================ %
 \begin{frame}[fragile]
 \frametitle{Ordered logistic regression with \texttt{R} }
@@ -99,6 +103,7 @@ somewhat likely|very likely  4.299  0.804      5.345
 % Residual Deviance: 717.02 
 % AIC: 727.02
 \end{frame}
+
 %================================================ %
 \begin{frame}[fragile]
 \frametitle{Ordered logistic regression with \texttt{R} }
@@ -109,7 +114,9 @@ somewhat likely|very likely  4.299  0.804      5.345
 $t-$value, which is simply the ratio of the coefficient to its standard error.\\ (Remark: There is no significance test by default.)
 \end{itemize}
 \end{frame}
+
 %================================================ %
+\begin{frame}
 \frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
 \begin{itemize}
@@ -130,7 +137,7 @@ Y, in turn, is a function of another latent variable, Y*, that is not measured.
 whose values determine what the observed ordinal variable Y equals.
 \item[b.] The continuous latent variable Y* has various threshold (or cutoff) points. 
 \end{itemize}
-\edn{frame}
+\end{frame}
 
 
 \begin{frame}
@@ -167,21 +174,27 @@ example, when M = 3
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+
+\frametitle{Ordered logistic regression \texttt{R} }
+
 	\Large
 \begin{itemize}
 \item Of course this is only true with infinite degrees of freedom, but is reasonably approximated by large 
 samples, becoming increasingly biased as sample size decreases. 
+
 %\item This approach is used in other software packages such as Stata and is trivial to do. 
+
 \item First we store the coefficient table, then calculate the $p-$values and combine back with the table.
+
 \end{itemize}
 \end{frame}
+
+
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression \texttt{R} }
 \normalsize
-	
-	\begin{verbatim}
+\begin{verbatim}
 		
 # store table
 (ctable <- coef(summary(m)))

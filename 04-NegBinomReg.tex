@@ -108,6 +108,16 @@ summary(dat)
 	
                
 \end{frame}
+
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{negbin1}
+%\caption{}
+%\label{fig:negbin1}
+\end{figure}
+
+\end{frame}
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Negative Binomial Regression with \texttt{R} }
@@ -120,4 +130,5 @@ ggplot(dat, aes(daysabs, fill = prog)) + geom_histogram(binwidth = 1) + facet_gr
 Histogram plots showing distribution of the data
 Each variable has 314 valid observations and their distributions seem quite reasonable. The unconditional mean of our outcome variable is much lower than its variance.
 \end{frame}
+
 \end{document}

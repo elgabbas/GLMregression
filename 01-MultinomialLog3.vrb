@@ -1,8 +1,10 @@
 
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
-\textbf{Things to consider}
-\begin{itemize}
-\item Empty cells or small cells: You should check for empty or small cells by doing a cross-tabulation between categorical predictors and the outcome variable. If a cell has very few cases (a small cell), the model may become unstable or it might not even run at all.
-\end{itemize}
+ plot predicted probabilities across write values for each level of ses
+ facetted by program type
+\begin{verbatim}
+ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet_grid(variable ~
+    ., scales = "free")
 
+\end{verbatim}

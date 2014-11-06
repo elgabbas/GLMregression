@@ -1,9 +1,13 @@
+
 \frametitle{Poisson Regression with \texttt{R}}
-\Large
-\begin{itemize}
+\large
+% create the plot
 
-\item Many different measures of pseudo-R-squared exist. They all attempt to provide information similar to that provided by R-squared in OLS regression, even though none of them can be interpreted exactly as R-squared in OLS regression is interpreted.
-
-%For a discussion of various pseudo-R-squares, see Long and Freese (2006) or our FAQ page What are pseudo R-squareds?.
-\item Poisson regression is estimated via maximum likelihood estimation. It usually requires a large sample size.
-\end{itemize}
+\begin{framed}
+\begin{verbatim}
+ggplot(p, aes(x = math, y = phat, colour = prog)) +
+  geom_point(aes(y = num_awards), alpha=.5, position=position_jitter(h=.2)) +
+  geom_line(size = 1) +
+  labs(x = "Math Score", y = "Expected number of awards")
+\end{verbatim}
+\end{framed}
