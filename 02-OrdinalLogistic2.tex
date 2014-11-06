@@ -4,8 +4,9 @@
 	
 %====================================================== %
 \begin{frame}
-	\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 	\Large
+\textbf{Confidence Intervals}
 	\begin{itemize}
 \item We can also get confidence intervals for the parameter estimates. 
 \item These can be obtained either by profiling the likelihood function or by using the standard errors and assuming a normal distribution.
@@ -15,7 +16,7 @@
 \end{frame}
 %====================================================== %
 \begin{frame}[fragile]
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\Large
 	\begin{verbatim}
 (ci <- confint(m)) 
@@ -30,10 +31,12 @@
 \end{frame}
 %====================================================== %
 \begin{frame}[fragile]
-\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 \Large
 \begin{verbatim}
-confint.default(m) # CIs assuming normality
+# CIs assuming normality
+
+confint.default(m) 
 
            2.5 %   97.5 %
  pared    0.5268    1.569
@@ -43,19 +46,19 @@ confint.default(m) # CIs assuming normality
 \end{frame}
 %====================================================== %
 \begin{frame}
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\Large
 \textbf{Confidence Intervals}
 \begin{itemize}
 \item The CIs for both pared and gpa do not include 0; but the CI for public does. 
 \item The estimates in the output are given in units of ordered logits, or ordered log odds. 
-\item So for pared, we would say that for a one unit increase in pared (i.e., going from 0 to 1), we expect a 1.05 
+\item For pared, we would say that for a one unit increase in pared (i.e., going from 0 to 1), we expect a 1.05 
 increase in the expect value of apply on the log odds scale, given all of the other variables in the model are held constant. 
 \end{itemize}
 \end{frame}
 %====================================================== %
 \begin{frame}
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\Large
 \textbf{Confidence Intervals}
 \begin{itemize}
@@ -65,7 +68,7 @@ apply in the log odds scale, given that all of the other variables in the model 
 \end{frame}
 %====================================================== %
 \begin{frame}
-	\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 	\Large
 \begin{itemize}
 \item  The coefficients from the model can be somewhat difficult to interpret because they are scaled in terms of logs. 
@@ -75,7 +78,7 @@ apply in the log odds scale, given that all of the other variables in the model 
 \end{frame}
 %====================================================== %
 \begin{frame}[fragile]
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\large
 \textbf{Odds Ratios}
 	\begin{verbatim}
@@ -95,7 +98,7 @@ exp(cbind(OR = coef(m), ci))
 \end{frame}
 %====================================================== %
 \begin{frame}
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\Large
 \begin{itemize}
 \item These coefficients are called \textbf{proportional odds ratios} and we would interpret these pretty much as 
@@ -107,7 +110,7 @@ given that all of the other variables in the model are held constant.
 \end{frame}
 %====================================================== %
 \begin{frame}
-		\frametitle{Ordered Logistic Regression \texttt{R} }
+		\frametitle{Ordered Logistic Regression with \texttt{R} }
 		\Large
 \begin{itemize}
 \item Similarly, the odds "\textit{very likely}" or "\textit{somewhat likely}" applying versus "\textit{unlikely}" applying is 2.85 times greater, 
