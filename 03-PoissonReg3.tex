@@ -5,37 +5,58 @@
 
 \frametitle{Poisson Regression with \texttt{R}}
 \Large 
-Now let's look at the output of function glm more closely.
+\textbf{glm} function output
 \begin{itemize}
  \item The output begins with echoing the function call. The information on deviance residuals is displayed next. 
- \item Deviance residuals are approximately normally distributed if the model is specified correctly.In our example, it shows a little bit of skeweness since median is not quite zero. 
+ \item Deviance residuals are approximately normally distributed if the model is specified correctly.
+ \item Here it shows a little bit of skeweness since median is not quite zero. 
 \end{itemize}
 \end{frame}
-
+%================================================================================================%
 \begin{frame}
+\Large 
+\textbf{glm} function output
 \begin{itemize}
-\item Next come the Poisson regression coefficients for each of the variables along with the standard errors, z-scores, p-values and 95\% confidence intervals for the coefficients. The coefficient for math is .07.This means that the expected log count for a one-unit increase in math is .07. 
+\item The Poisson regression coefficients for each of the variables along with the standard errors, z-scores, p-values 
+and 95\% confidence intervals for the coefficients. 
+\item The coefficient for math is 0.07.
+\item This means that the expected log count for a one-unit increase in math is 0.07. 
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+%===========================================================%
+\frametitle{Poisson Regression with \texttt{R}}
+\Large 
+\textbf{glm} function output
+	\begin{itemize}
+
+\item The indicator variable \textbf{progAcademic} compares between \textbf{\textit{prog = “Academic” }}and \textbf{\textit{prog = "General"}} , the expected log 
+count for \textbf{\textit{prog = “Academic” }}increases by about 1.1. 
+\item The indicator variable \textbf{prog.Vocational}  is the expected difference in log count (\(\approx 0.37\)) between 
+\textbf{\textit{prog = "Vocational"}} and the reference group (\textbf{\textit{prog = "General"}} ).
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\begin{itemize}
-
-\item The indicator variable progAcademic compares between prog = "Academic" and prog = "General", the expected log count for prog = "Academic" increases by about 1.1. The indicator variable prog.Vocational is the expected difference in log count (\(\approx .37\)) between prog = "Vocational" and the reference group (prog = "General").
+%===========================================================%
+\begin{frame}[fragile]
+\frametitle{Poisson Regression with \texttt{R}}
+\Large 
+\textbf{glm} function output
+\begin{itemize}
+\item The information on deviance is also provided. 
+\item We can use the residual deviance to perform a goodness of fit test for the overall model. 
+\item The residual deviance is the difference between the deviance of the current model and the maximum deviance of the ideal model where the predicted values are identical to the observed. 
 \end{itemize}
 \end{frame}
-
-\begin{frame}
-	\begin{itemize}
-
-\item The information on deviance is also provided. We can use the residual deviance to perform a goodness of fit test for the overall model. The residual deviance is the difference between the deviance of the current model and the maximum deviance of the ideal model where the predicted values are identical to the observed. 
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\begin{itemize}
+%===========================================================%
+\begin{frame}[fragile]
+\frametitle{Poisson Regression with \texttt{R}}
+\Large 
+\textbf{glm} function output
+\begin{itemize}
 \item Therefore, if the residual difference is small enough, the goodness of fit test will not be significant, indicating that the model fits the data. We conclude that the model fits reasonably well because the goodness-of-fit chi-squared test is not statistically significant. 
-\item If the test had been statistically significant, it would indicate that the data do not fit the model well. In that situation, we may try to determine if there are omitted predictor variables, if our linearity assumption holds and/or if there is an issue of over-dispersion. 
+\item If the test had been statistically significant, it would indicate that the data do not fit the model well. 
+\item In that situation, we may try to determine if there are omitted predictor variables, if our linearity assumption holds and/or if there is an issue of over-dispersion. 
 \end{itemize}
 \end{frame}
 
@@ -43,12 +64,14 @@ Now let's look at the output of function glm more closely.
 \begin{frame}[fragile]
 
 \frametitle{Poisson Regression with \texttt{R}}
-\Large
+\large
 
 \begin{framed}
 \begin{verbatim}
-with(m1, cbind(res.deviance = deviance, df = df.residual,
-  p = pchisq(deviance, df.residual, lower.tail=FALSE)))
+with(m1, cbind(res.deviance = deviance, 
+	df = df.residual,
+        p = pchisq(deviance, df.residual, 
+            lower.tail=FALSE)))
  
       res.deviance  df      p
  [1,]        189.4 196 0.6182
@@ -240,8 +263,7 @@ p <- p[with(p, order(prog, math)), ]
 
 \frametitle{Poisson Regression with \texttt{R}}
 \Large
-
- create the plot
+% create the plot
 
 \begin{framed}
 \begin{verbatim}
@@ -254,55 +276,5 @@ ggplot(p, aes(x = math, y = phat, colour = prog)) +
 \end{frame}
 %======================================================
 
-%==========================================%
-\begin{frame}[fragile]
 
-\frametitle{Poisson Regression with \texttt{R}}
-\Large
-Things to consider
-\begin{itemize}
-
- \item When there seems to be an issue of dispersion, we should first check if our model is appropriately specified, such as omitted variables and functional forms. For example, if we omitted the predictor variable prog in the example above, our model would seem to have a problem with over-dispersion. In other words, a misspecified model could present a symptom like an over-dispersion problem. 
-\end{itemize}
-\end{frame}
-%==========================================%
-\begin{frame}[fragile]
-\frametitle{Poisson Regression with \texttt{R}}
-	\Large
-\begin{itemize}
-\item Assuming that the model is correctly specified, the assumption that the conditional variance is equal to the conditional mean should be checked. There are several tests including the likelihood ratio test of over-dispersion parameter alpha by running the same model using negative binomial distribution. R package pscl (Political Science Computational Laboratory, Stanford University) provides many functions for binomial and count data including odTest for testing over-dispersion. 
-\end{itemize}
-\end{frame}
-%==========================================%
-\begin{frame}[fragile]
-	\frametitle{Poisson Regression with \texttt{R}}
-	\Large
-	\begin{itemize}
-\item One common cause of over-dispersion is excess zeros, which in turn are generated by an additional data generating process. In this situation, zero-inflated model should be considered.
-\item If the data generating process does not allow for any 0s (such as the number of days spent in the hospital), then a zero-truncated model may be more appropriate.
-\end{itemize}
-\end{frame}
-%==========================================%
-\begin{frame}[fragile]
-	\frametitle{Poisson Regression with \texttt{R}}
-	\Large
-	\begin{itemize} 
-\item Count data often have an exposure variable, which indicates the number of times the event could have happened. This variable should be incorporated into a Poisson model with the use of the offset option.
-\item The outcome variable in a Poisson regression cannot have negative numbers, and the exposure cannot have 0s.
-\end{itemize}
-\end{frame}
-%==========================================%
-\begin{frame}[fragile]
-	\frametitle{Poisson Regression with \texttt{R}}
-	\Large
-	\begin{itemize} 
-
-\item Many different measures of pseudo-R-squared exist. They all attempt to provide information similar to that provided by R-squared in OLS regression, even though none of them can be interpreted exactly as R-squared in OLS regression is interpreted.
- 
-%For a discussion of various pseudo-R-squares, see Long and Freese (2006) or our FAQ page What are pseudo R-squareds?.
-\item Poisson regression is estimated via maximum likelihood estimation. It usually requires a large sample size. 
-\end{itemize}
-\end{frame}
-
-%================================================================================================%
 \end{document}
