@@ -1,7 +1,24 @@
 
+install.packages("nnet","sandwich","msm","reshape2")
 
-ml <- read.dta("http://www.ats.ucla.edu/stat/data/hsbdemo.dta")
+require(foreign)
+require(ggplot2)
+require(MASS)
+require(Hmisc)
+require(reshape2)
+require(sandwich)
+require(msm)
+
+
+###############################################
+
+library(nnet)
+library(ggplot2)
+library(reshape2)
+
+ml <- read.dta("multilog.csv")
   
+###############################################
 
 with(ml, table(ses, prog))
  
@@ -13,7 +30,7 @@ test <- multinom(prog2 ~ ses + write, data = ml)
 
 summary(test)
 
- 
+############################################### 
 z <- summary(test)$coefficients/summary(test)$standard.errors
 z
 
