@@ -1,4 +1,4 @@
-dat <- read.dta("http://www.ats.ucla.edu/stat/data/ologit.dta")
+dat <- read.csv("ologit.csv")
 head(dat)
 
 
