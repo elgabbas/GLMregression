@@ -94,7 +94,7 @@ summary(m1)
 % Cameron and Trivedi (2009) 
 \item It is recommended using robust standard errors for the parameter estimates to control for mild violation of the distribution assumption that the variance equals the mean. 
 \item The  R package \textbf{\textit{sandwich}} can be used to obtain the robust standard errors and calculated the p-values accordingly. 
-\item Together with the p-values, we have also calculated the 95% confidence interval using the parameter estimates and their robust standard errors. 
+\item Together with the p-values, we have also calculated the 95\% confidence interval using the parameter estimates and their robust standard errors. 
 \end{itemize}
 \end{frame}
 
@@ -103,12 +103,30 @@ summary(m1)
 
 \frametitle{Poisson Regression with \texttt{R}}
 \large
+\textbf{sandwich \texttt{R} Package }
+\begin{itemize}
+\item Robust Covariance Matrix Estimators
+ 
+\item Model-robust standard error estimators for cross-sectional, time series, and longitudinal data.
+
+\end{itemize}
+\end{frame}
+
+%================================================================================================%
+\begin{frame}[fragile]
+
+\frametitle{Poisson Regression with \texttt{R}}
+\large
+\textbf{Robust Standard Errors}
 \begin{framed}
 \begin{verbatim}
 cov.m1 <- vcovHC(m1, type="HC0")
 std.err <- sqrt(diag(cov.m1))
-r.est <- cbind(Estimate= coef(m1), "Robust SE" = std.err,
-"Pr(>|z|)" = 2 * pnorm(abs(coef(m1)/std.err), lower.tail=FALSE),
+
+r.est <- cbind(Estimate= coef(m1), 
+  "Robust SE" = std.err,
+  "Pr(>|z|)" = 2 * pnorm(abs(coef(m1)/std.err), 
+  lower.tail=FALSE),
 LL = coef(m1) - 1.96 * std.err,
 UL = coef(m1) + 1.96 * std.err)
 
