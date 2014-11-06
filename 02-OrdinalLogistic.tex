@@ -2,10 +2,11 @@
 \begin{document}
 %=========================================%
 \begin{frame}
+\frametitle{Ordered logistic regression with \texttt{R} }
 \textbf{Ordered logit model}
 
 \begin{itemize}
-\item The ordered (or Ordinal) logit model (also ordered logistic regression or proportional odds model), is a regression model for ordinal dependent variables. 
+\item The Ordered (or Ordinal) logit model (also ordered logistic regression or proportional odds model), is a regression model for ordinal dependent variables. 
 \item For example, questions on a survey answered by a choice among "poor", "fair", "good", "very good", and "excellent".
 \item The purpose of 
 the analysis is to see how well that response can be predicted by the responses to other questions, some of which may be quantitative
@@ -15,6 +16,7 @@ the analysis is to see how well that response can be predicted by the responses 
 %========================================================%
 
 \begin{frame}
+\frametitle{Ordered logistic regression with \texttt{R} }
 \textbf{Ordered logit model}
 
 \begin{itemize}
@@ -36,7 +38,7 @@ logistic regression model that applies to dichotomous dependent variables, allow
 
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
 \textbf{\texttt{polr}}
 \begin{itemize}
@@ -47,7 +49,7 @@ regression model.
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
 \textbf{\texttt{polr}}
 \begin{itemize}
@@ -58,7 +60,7 @@ followed by predictors.
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-\frametitle{Ordered Logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 \large
 \begin{framed}		
 \begin{verbatim}
@@ -78,7 +80,7 @@ summary(m)
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered Logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 	\normalsize
 \begin{verbatim}
 Coefficients:
@@ -99,7 +101,7 @@ somewhat likely|very likely  4.299  0.804      5.345
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered Logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
 \begin{itemize}
 \item[1] The ``Call", what type of model we ran, what options we specified, etc.
@@ -108,8 +110,7 @@ $t-$value, which is simply the ratio of the coefficient to its standard error.\\
 \end{itemize}
 \end{frame}
 %================================================ %
-\begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
 \begin{itemize}
 \item[3]	
@@ -117,11 +118,37 @@ We then have the estimates for the two intercepts (which are sometimes called \t
 \item[4] The intercepts indicate where the latent variable is cut to make the three groups that we observe in our data. 
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Ordered logistic regression with \texttt{R} }
+In the ordered logit model, there is an observed ordinal variable, Y.
+Y, in turn, is a function of another latent variable, Y*, that is not measured.
+
+\begin{itemize}
+\item[a.] In the ordered logit model, there is a continuous, unmeasured latent variable Y*,
+whose values determine what the observed ordinal variable Y equals.
+\item[b.] The continuous latent variable Y* has various threshold (or cutoff) points. 
+\end{itemize}
+\edn{frame}
+
+
+\begin{frame}
+\frametitle{Ordered logistic regression with \texttt{R} }
+Your value on the
+observed ordinal variable Y depends on whether or not you have crossed a particular threshold. For
+example, when M = 3
+\begin{itemize}
+\item Yi = 1 if Y*i is $ \le $ CP1
+\item Yi = 2 if CP1 $ \le $ Y*i $ \le $ CP2
+\item Yi = 3 id Y*i $ \ge $ CP2
+\end{itemize}
+\end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+	\frametitle{Ordered logistic regression with \texttt{R} }
 	\Large
-	\textbf{CUT THIS SLIDE}
+
 \begin{itemize}
 \item Note that this latent variable is continuous. In general, these are not used in the interpretation of the results. \item  The cutpoints are closely related to thresholds, which are reported by other statistical packages.
 \end{itemize}
@@ -130,8 +157,9 @@ We then have the estimates for the two intercepts (which are sometimes called \t
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }
 	\Large
+\textbf{Model Diagnostics}
 \begin{itemize}
-\item Finally, we see the residual deviance, -2 * Log Likelihood of the model as well as the AIC. 
+\item We see the residual deviance, -2 * Log Likelihood of the model as well as the AIC. 
 \item Both the deviance and AIC are useful for model comparison.
 \item Of, course, some people are not satisfied without a $p-$value.
 \item One way to calculate a $p-$value in this case is by comparing the $t-$value against the standard normal distribution, like a $z-$test. 
