@@ -29,8 +29,8 @@
 
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
-	\Large
+\frametitle{Ordered logistic regression \texttt{R} }
+\Large
 \begin{framed}
 \begin{verbatim}
 plot(s, which=1:3, pch=1:3, 
@@ -97,9 +97,9 @@ head(newdat)
 
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
-	\Large
-	\begin{itemize}
+\frametitle{Ordered logistic regression \texttt{R} }
+\Large
+\begin{itemize}
 \item Now we can reshape the data long with the reshape2 package and plot all of the predicted probabilities for the different conditions. 
 \item We plot the predicted probilities, connected with a line, coloured by level of the outcome, apply, and facetted by level of pared and public.
 \item We also use a custom label function, to add clearer labels showing what each column and row of the plot represent.
@@ -108,7 +108,7 @@ head(newdat)
 
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
+\frametitle{Ordered logistic regression \texttt{R} }
 \normalsize
 \large
 \begin{framed}
@@ -154,12 +154,10 @@ ggplot(lnewdat, aes(x = gpa, y = Probability,
     
 \end{verbatim}
 \end{framed}
-
 \end{frame}
-
+%==========================================================================%
 \begin{frame}
-	
-	
+
 \begin{figure}
 \centering
 \includegraphics[width=0.99\linewidth]{ologit3}
@@ -170,15 +168,14 @@ ggplot(lnewdat, aes(x = gpa, y = Probability,
 \end{frame}
 %================================================ %
 \begin{frame}[fragile]
-	\frametitle{Ordered logistic regression \texttt{R} }
-	\Large
+\frametitle{Ordered logistic regression \texttt{R} }
+\Large
 %Plot of predicted probabilities for each group
 \textbf{Things to consider
 }
 \textbf{Perfect prediction: }Perfect prediction means that one value of a predictor variable is associated with only one value of the response variable. 
 %If this happens, Stata will usually issue a note at the top of the output and will drop the cases so that the model can run.
 \end{frame}
-
 %================================================ %
 \begin{frame}[fragile]
 	\frametitle{Ordered logistic regression \texttt{R} }

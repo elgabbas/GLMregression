@@ -13,6 +13,7 @@
 
 \frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
+\vspace{-1cm}
 \textbf{Odds Ratios}
 \begin{itemize}
 \item The ratio of the probability of choosing one outcome category over the probability of choosing the baseline category is often referred as 
@@ -28,6 +29,7 @@
 	\begin{itemize}
 \item  The relative risk is the (right-hand side) linear equation exponentiated, leading to the fact that the 
 exponentiated regression coefficients are relative risk ratios for a unit change in the predictor variable. 
+\smallskip
 \item  We can exponentiate the coefficients from our model to see these odds ratios (next slide). 
 \end{itemize}
 \end{frame}
@@ -168,48 +170,48 @@ by(pp.write[, 3:5], pp.write$ses, colMeans)
 \end{verbatim}
 \end{frame}
 %================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large
-\begin{itemize}
-\item A couple of plots can convey a good deal amount of information. 
-\item Using the predictions we generated for the \texttt{pp.write} object above, we can plot the predicted probabilities against the writing score by the level 
-of \textbf{\textit{ses}} for different levels of the outcome variable.
-\end{itemize} 
-\end{frame}
+%\begin{frame}[fragile]
+%
+%\frametitle{Multinomial Regression with \texttt{R}}
+%\Large
+%\begin{itemize}
+%\item A couple of plots can convey a good deal amount of information. 
+%\item Using the predictions we generated for the \texttt{pp.write} object above, we can plot the predicted probabilities against the writing score by the level 
+%of \textbf{\textit{ses}} for different levels of the outcome variable.
+%\end{itemize} 
+%\end{frame}
 %================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Logistic Regression with \texttt{R}}
-\large
-remark: melt data set to long for ggplot2
-\begin{verbatim}
-lpp <- melt(pp.write, id.vars = c("ses", "write"),
-            value.name = "probability")
- 
-head(lpp)  # view first few rows
- 
-   ses write variable probability
- 1 low    30 academic     0.09844
- 2 low    31 academic     0.10717
- 3 low    32 academic     0.11650
- 4 low    33 academic     0.12646
- 5 low    34 academic     0.13705
- 6 low    35 academic     0.14828
-\end{verbatim}
-\end{frame}
+%\begin{frame}[fragile]
+%
+%\frametitle{Multinomial Logistic Regression with \texttt{R}}
+%\large
+%remark: melt data set to long for ggplot2
+%\begin{verbatim}
+%lpp <- melt(pp.write, id.vars = c("ses", "write"),
+%            value.name = "probability")
+% 
+%head(lpp)  # view first few rows
+% 
+%   ses write variable probability
+% 1 low    30 academic     0.09844
+% 2 low    31 academic     0.10717
+% 3 low    32 academic     0.11650
+% 4 low    33 academic     0.12646
+% 5 low    34 academic     0.13705
+% 6 low    35 academic     0.14828
+%\end{verbatim}
+%\end{frame}
 %================================================================================================%
-\begin{frame}[fragile]
-
-\frametitle{Multinomial Regression with \texttt{R}}
-\Large 
- plot predicted probabilities across write values for each level of ses
- facetted by program type
-\begin{verbatim}
-ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet_grid(variable ~
-    ., scales = "free")
- 
-\end{verbatim}
-\end{frame}
+%\begin{frame}[fragile]
+%
+%\frametitle{Multinomial Regression with \texttt{R}}
+%\Large 
+% plot predicted probabilities across write values for each level of ses
+% facetted by program type
+%\begin{verbatim}
+%ggplot(lpp, aes(x = write, y = probability, colour = ses)) + geom_line() + facet_grid(variable ~
+%    ., scales = "free")
+% 
+%\end{verbatim}
+%\end{frame}
 \end{document}
