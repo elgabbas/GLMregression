@@ -1,36 +1,37 @@
-polr {MASS}	R Documentation
+polr {MASS} - R Documentation
+==========================================
 Ordered Logistic or Probit Regression
 
-Description
+### Description
 
 Fits a logistic or probit regression model to an ordered factor response. The default logistic case is proportional odds logistic regression, after which the function is named.
 
-Usage
+### Usage
 
 polr(formula, data, weights, start, ..., subset, na.action,
      contrasts = NULL, Hess = FALSE, model = TRUE,
      method = c("logistic", "probit", "cloglog", "cauchit"))
 Arguments
 
-formula	
+#### formula	
 a formula expression as for regression models, of the form response ~ predictors. The response should be a factor (preferably an ordered factor), which will be interpreted as an ordinal response, with levels ordered as in the factor. The model must have an intercept: attempts to remove one will lead to a warning and be ignored. An offset may be used. See the documentation of formula for other details.
 
-data	
+#### data	
 an optional data frame in which to interpret the variables occurring in formula.
 
-weights	
+#### weights	
 optional case weights in fitting. Default to 1.
 
-start	
+#### start	
 initial values for the parameters. This is in the format c(coefficients, zeta): see the Values section.
 
-...	
+#### ...	
 additional arguments to be passed to optim, most often a control argument.
 
-subset	
+#### subset	
 expression saying which subset of the rows of the data should be used in the fit. All observations are included by default.
 
-na.action	
+#### na.action	
 a function to filter missing data.
 
 contrasts	
@@ -45,7 +46,7 @@ logical for whether the model matrix should be returned.
 method	
 logistic or probit or complementary log-log or cauchit (corresponding to a Cauchy latent variable).
 
-Details
+## Details
 
 This model is what Agresti (2002) calls a cumulative link model. The basic interpretation is as a coarsened version of a latent variable Y_i which has a logistic or normal or extreme-value or Cauchy distribution with scale parameter one and a linear model for the mean. The ordered factor which is observed is which bin Y_i falls into with breakpoints
 
@@ -103,23 +104,23 @@ the matched method used.
 convergence	
 the convergence code returned by optim.
 
-niter	
+#### niter	
 the number of function and gradient evaluations used by optim.
 
-lp	
+#### lp	
 the linear predictor (including any offset).
 
-Hessian	
+#### Hessian	
 (if Hess is true). Note that this is a numerical approximation derived from the optimization proces.
 
-model	
+#### model	
 (if model is true).
 
-Note
+#### Note
 
 The vcov method uses the approximate Hessian: for reliable results the model matrix should be sensibly scaled with all columns having range the order of one.
 
-References
+#### References
 
 Agresti, A. (2002) Categorical Data. Second edition. Wiley.
 
@@ -128,26 +129,3 @@ Venables, W. N. and Ripley, B. D. (2002) Modern Applied Statistics with S. Fourt
 See Also
 
 optim, glm, multinom.
-
-Examples
-
-options(contrasts = c("contr.treatment", "contr.poly"))
-house.plr <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
-house.plr
-summary(house.plr, digits = 3)
-## slightly worse fit from
-summary(update(house.plr, method = "probit", Hess = TRUE), digits = 3)
-## although it is not really appropriate, can fit
-summary(update(house.plr, method = "cloglog", Hess = TRUE), digits = 3)
-
-predict(house.plr, housing, type = "p")
-addterm(house.plr, ~.^2, test = "Chisq")
-house.plr2 <- stepAIC(house.plr, ~.^2)
-house.plr2$anova
-anova(house.plr, house.plr2)
-
-house.plr <- update(house.plr, Hess=TRUE)
-pr <- profile(house.plr)
-confint(pr)
-plot(pr)
-pairs(pr)
