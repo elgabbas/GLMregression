@@ -1,3 +1,30 @@
+
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{framed}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode"CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 201113:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{R Programming} \rhead{Kevin O'Brien} \chead{Ordinal Logistic Regression} %\input{tcilatex}
+
+
+\begin{document}
+
 % - http://stackoverflow.com/questions/17839292/polr-ordinal-logistic-regression-in-r
 Following @joran's advice that your problem is probably the 100-level factor, I'm going to recommend something that probably isn't statistically valid but will probably still be effective in your particular situation: don't use logistic regression at all. Just drop it. Perform a simple linear regression and then discretize your output as necessary using a specialized rounding procedure. Give it a shot and see how well it works for you.
 rep.v = c(0.00, 0.04, 0.06, 0.13, 0.15, 0.05, 0.07, 0.00, 0.06, 0.04, 0.05, 0.00, 0.92, 0.95, 0.95, 1, 0.97, 0.06, 0.06, 0.03, 0.03, 0.08, 0.07, 0.04, 0.08, 0.03, 0.07, 0.05, 0.05, 0.06, 0.04, 0.04, 0.08, 0.04, 0.04, 0.04, 0.97, 0.03, 0.04, 0.02, 0.04, 0.01, 0.06, 0.06, 0.07, 0.08, 0.05, 0.03, 0.06,0.03)
@@ -39,14 +66,18 @@ rounded = sapply(output, function(x){
 I am new to R, ordered logistic regression, and polr.
 
 The "Examples" section at the bottom of the help page for polr (that fits a logistic or probit regression model to an ordered factor response) shows
+\begin{verbatim}
 options(contrasts = c("contr.treatment", "contr.poly"))
-house.plr <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+house.plr <- polr(Sat ~ Infl + Type + Cont, weights = Freq, 
+        data = housing)
 pr <- profile(house.plr)
 plot(pr)
 pairs(pr) 
+\end{verbatim}
+
 %==============================================================%
 \begin{itemize}	
-\item	How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
+\item	How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "\% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
 \item	How does one apply and interpret anova on this model? The docs say "There are methods for the standard model-fitting functions, including predict, summary, vcov, anova." However, running anova(house.plr) results in anova is not implemented for a single "polr" object
 \item	How does one interpret the t values for each coefficient? Unlike some model fits, there are no P values here.
 \item	What information does pr contain? The help page on profile is generic, and gives no guidance for polr.
@@ -60,22 +91,30 @@ I realize this is a lot of questions, but it makes sense to me to ask as one bun
 
 %============================================5
 \newpage
-I would suggest you look at books on categorical data analysis (cf. Alan Agresti's Categorical Data Analysis, 2002) for better explanation and understanding of ordered logistic regression. All the questions that you ask are basically answered by a few chapters in such books. If you are only interested in R related examples, Extending Linear Models in R by Julian Faraway (CRC Press, 2008) is a great reference.
+\begin{itemize}
+    \item I would suggest you look at books on categorical data analysis (cf. Alan Agresti's Categorical Data Analysis, 2002) for better explanation and understanding of ordered logistic regression. All the questions that you ask are basically answered by a few chapters in such books. If you are only interested in R related examples, Extending Linear Models in R by Julian Faraway (CRC Press, 2008) is a great reference.
 
-Before I answer your questions, ordered logistic regression is a case of multinomial logit models in which the categories are ordered. Suppose we have J ordered categories and that for individual i, with ordinal response Yi, pij=P(Yi=j) for j=1,...,J. With an ordered response, it is often easier to work with the cumulative probabilities, γij=P(Yi≤j). The cumulative probabilities are increasing and invariant to combining adjacent categories. Furthermore, γiJ=1, so we need only model J–1 probabilities.
+\item Before I answer your questions, ordered logistic regression is a case of multinomial logit models in which the categories are ordered. Suppose we have J ordered categories and that for individual i, with ordinal response Yi, pij=P(Yi=j) for $j=1,...,J$. 
 
-Now we want to link γijs to covariates x. In your case, Sat has 3 ordered levels: low, medium, high. It makes more sense to treat them as ordered rather than unordered. The remaining variables are your covariates. The specific model that you are considering is the proportional odds model and is mathematically equivalent to:
+\item With an ordered response, it is often easier to work with the cumulative probabilities, $\gamma_{ij}=P(Yi\leq j)$. The cumulative probabilities are increasing and invariant to combining adjacent categories. Furthermore, $\gamma_{ij=1$, so we need only model J–1 probabilities.
+
+\item Now we want to link γijs to covariates x. In your case, Sat has 3 ordered levels: low, medium, high. It makes more sense to treat them as ordered rather than unordered. The remaining variables are your covariates. The specific model that you are considering is the proportional odds model and is mathematically equivalent to:
+\end{itemize}
+
 
 \[logit γj(xi)=θj−βTxi,j=1…J−1]\
 where γj(xi)=P(Yi≤j|xi)
 It is so called because the relative odds for $Y\leq j$ comparing x1 and x2 are:
 
 \[(γj(x1)1−γj(x1))/(γj(x2)1−γj(x2))=exp(−βT(x1−x2))\]
-Notice, the above expression does not depend on j. Of course, the assumption of proportional odds does need to be checked for a given dataset.
+\begin{itemize}
+    \item Notice, the above expression does not depend on j. Of course, the assumption of proportional odds does need to be checked for a given dataset.
 
-Now, I will answer some (1, 2, 4) questions.
+\item Now, I will answer some (1, 2, 4) questions.
 
-How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
+\item How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "\% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
+
+\end{itemize}
 
 %-----------------------------------------------%
 \newpage
@@ -89,19 +128,23 @@ You would use the chi-square test for this. The p-value is obtained as:
 \end{verbatim}
 Most of the time you'd hope to obtain a p-value greater than 0.05 so that you don't reject the null to conclude that the model is good fit (philosophical correctness is ignored here).
 
-AIC should be high for a good fit at the same time you don't want to have a large number of parameters. stepAIC is a good way to check this.
+\begin{itemize}
+    \item AIC should be high for a good fit at the same time you don't want to have a large number of parameters. stepAIC is a good way to check this.
 
-Yes, you can definitely use cross validation to see if the predictions hold. See predict function (option: type = "probs") in ?polr. All you need to take care of is the covariates.
+   \item Yes, you can definitely use cross validation to see if the predictions hold. See predict function (option: type = "probs") in ?polr. All you need to take care of is the covariates.
 
-What information does pr contain? The help page on profile is generic, and gives no guidance for polr
+   \item What information does pr contain? The help page on profile is generic, and gives no guidance for polr
 
-As pointed by @chl and others, pr contains all the information needed for obtaining CIs and other likelihood related information of the polr fit. All glms are fit using iteratively weighted least square estimation method for the log likelihood. In this optimization you obtain a lot of information (please see the references) which will be needed for calculating Variance Covariance Matrix, CI, t-value etc. It includes all of it.
+   \item As pointed by @chl and others, pr contains all the information needed for obtaining CIs and other likelihood related information of the polr fit. All glms are fit using iteratively weighted least square estimation method for the log likelihood.
+      \item In this optimization you obtain a lot of information (please see the references) which will be needed for calculating Variance Covariance Matrix, CI, t-value etc. It includes all of it.
 
-How does one interpret the t values for each coefficient? Unlike some model >fits, there are no P values here.
+   \item How does one interpret the t values for each coefficient? Unlike some model >fits, there are no P values here.
+
+\end{itemize}
 
 Unlike normal linear model (special glm) other glms are don't have the nice t-distribution for the regression coefficients. Therefore all you can get is the parameter estimates and their asymptotic variance covariance matrix using the max-likelihood theory. Therefore:
 
-Variance(β^)=(XTWX)−1ϕ^
+\[Variance(\hat{\beta})=(X^TWX)^{−1} \hat{\psi}\]
 Estimate divided by its standard error is what BDR and WV call t-value (I am assuming MASS convention here). It is equivalent to t-value from normal linear regression but does not follow a t-distribution. Using CLT, it is asymptotically normally distributed. But they prefer not to use this approx (I guess), hence no p-values. (I hope I am not wrong, and if I am, I hope BDR is not on this forum. I further hope, someone will correct me if I am wrong.)
 
 
@@ -109,7 +152,9 @@ Estimate divided by its standard error is what BDR and WV call t-value (I am ass
   	 	
  1. Functionally in R, how does one test the proportional odds assumption? 2. Are you sure that chi-squared test is right? On this example it returns 0, meaning .. crappy fit? But some of the t values are pretty high (InflHigh 10.1, InflMedium 5.4, ContHigh 3.7). 3. What are the plots or pairs showing? –  dfrankow Mar 10 '11 at 16:38
   	 	
-Thanks for your extensive answer suncoolsu. I'm in a similar situation and have a couple of questions. 1. I also get 0 for every model using your chi-sq test equation. 2. The wikipedia page on AIC says "the preferred model is the one with the minimum AIC value", but you said, "AIC should be high for a good fit." I'm trying to reconcile these accounts. –  Sam Swift Mar 17 '11 at 15:02
+Thanks for your extensive answer suncoolsu. I'm in a similar situation and have a couple of questions. 
+1. I also get 0 for every model using your chi-sq test equation. 
+2. The wikipedia page on AIC says "the preferred model is the one with the minimum AIC value", but you said, "AIC should be high for a good fit." I'm trying to reconcile these accounts. –  Sam Swift Mar 17 '11 at 15:02
   	 	
 %------------------------------------------------%
 
