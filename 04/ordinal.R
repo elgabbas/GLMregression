@@ -1,20 +1,18 @@
 % - http://www.uni-kiel.de/psychologie/rexrepos/posts/regressionOrdinal.html
-Install required packages
-MASS, ordinal, rms, VGAM
+## Install required packages
+## MASS, ordinal, rms, VGAM
 
 wants <- c("MASS", "ordinal", "rms", "VGAM")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-Ordinal regression (proportional odds model)
 
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
-Simulate data
+#########################################################
 
-Dependent variable Yord with k=4 groups, p=2 predictor variables
+## Ordinal regression (proportional odds model)
+
+## Simulate data
+
+## Dependent variable Yord with k=4 groups, p=2 predictor variables
 
 set.seed(123)
 N     <- 100
@@ -24,71 +22,45 @@ Ycont <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
 Yord  <- cut(Ycont, breaks=quantile(Ycont), include.lowest=TRUE,
              labels=c("--", "-", "+", "++"), ordered=TRUE)
 dfOrd <- data.frame(X1, X2, Yord)
-Using vglm() from package VGAM
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
-Model using cumulative logits: logit(p(Y≥g))=lnP(Y≥g)1−P(Y≥g)=β0g+β1X1+⋯+βpXp(g=2,…,k)
+
+## Using vglm() from package VGAM
+
 library(VGAM)
 (vglmFit <- vglm(Yord ~ X1 + X2, family=propodds, data=dfOrd))
-Call:
-vglm(formula = Yord ~ X1 + X2, family = propodds, data = dfOrd)
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
-Coefficients:
-(Intercept):1 (Intercept):2 (Intercept):3            X1            X2 
-    -15.61123     -17.00112     -18.28507       0.11197      -0.09518 
+# Call:
+# vglm(formula = Yord ~ X1 + X2, family = propodds, data = dfOrd)
+# Coefficients:
+# (Intercept):1 (Intercept):2 (Intercept):3            X1            X2 
+#     -15.61123     -17.00112     -18.28507       0.11197      -0.09518 
+# 
+# Degrees of Freedom: 300 Total; 295 Residual
+# Residual deviance: 249.4 
+# Log-likelihood: -124.7 
 
-Degrees of Freedom: 300 Total; 295 Residual
-Residual deviance: 249.4 
-Log-likelihood: -124.7 
-Equivalent:
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+################################
+
 vglm(Yord ~ X1 + X2, family=cumulative(parallel=TRUE, reverse=TRUE), data=dfOrd)
+
 # not shown
-Adjacent category logits lnP(Y=g)P(Y=g−1) with proportional odds assumption
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+# Adjacent category logits lnP(Y=g)P(Y=g−1) with proportional odds assumption
+
 vglm(Yord ~ X1 + X2, family=acat(parallel=TRUE), data=dfOrd)
 # not shown
 Continuation ratio logits lnP(Y=g)P(Y<g) with proportional odds assumption (discrete version of Cox proportional hazards model for survival data)
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+
 vglm(Yord ~ X1 + X2, family=sratio(parallel=TRUE), data=dfOrd)
 # not shown
+
 Using lrm() from package rms
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
-Model logit(p(Y≥g))=β0g+β1X1+⋯+βpXp(g=2,…,k)
+
+#################################
 library(rms)
 (lrmFit <- lrm(Yord ~ X1 + X2, data=dfOrd))
 
 Logistic Regression Model
 
 lrm(formula = Yord ~ X1 + X2, data = dfOrd)
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+
 Frequencies of Responses
 
 --  -  + ++ 
@@ -108,14 +80,9 @@ y>=+  -17.0010 5.5508 -3.06  0.0022
 y>=++ -18.2849 5.5863 -3.27  0.0011  
 X1      0.1120 0.0314  3.56  0.0004  
 X2     -0.0952 0.0272 -3.50  0.0005  
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+##################################################################
 Using polr() from package MASS
 
-Model logit(p(Y≤g))=β0g−(β1X1+⋯+βpXp)(g=1,…,k−1)
 library(MASS)
 (polrFit <- polr(Yord ~ X1 + X2, method="logistic", data=dfOrd))
 # not shown
@@ -123,24 +90,16 @@ Profile likelihood based confidence intervals
 
 exp(confint(polrFit))
 Error: Objekt 'dfOrd' nicht gefunden
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+
 Using clm() from package ordinal
 
-Model logit(p(Y≤g))=β0g−(β1X1+⋯+βpXp)(g=1,…,k−1)
 library(ordinal)
 (clmFit <- clm(Yord ~ X1 + X2, link="logit", data=dfOrd))
 # not shown
 Predicted category membership
 Predicted category probabilities
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+########################################################################
+
 PhatCateg <- predict(vglmFit, type="response")
 head(PhatCateg)
        --      -      +     ++
@@ -153,12 +112,7 @@ head(PhatCateg)
 predict(lrmFit, type="fitted.ind")
 predict(clmFit, subset(dfOrd, select=c("X1", "X2"), type="prob"))$fit
 predict(polrFit, type="probs")
-# not shown
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+#####################################################
 Predicted categories
 
 categHat <- levels(dfOrd$Yord)[max.col(PhatCateg)]
@@ -167,11 +121,7 @@ head(categHat)
 predict(clmFit, type="class")
 predict(polrFit, type="class")
 # not shown
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-	\frametitle{Negative Binomial Regression with \texttt{R} }
-	\Large
+###################################################
 Apply regression model to new data
 Simulate new data
 
@@ -189,11 +139,7 @@ predict(lrmFit,  dfNew, type="fitted.ind")
 predict(polrFit, dfNew, type="probs")
 predict(clmFit,  subset(dfNew, select=c("X1", "X2"), type="prob"))$fit
 # not shown
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+#########################################################################
 Assess model fit
 Classification table
 
@@ -233,12 +179,7 @@ LL0   <- logLik(vglm0)
 McFadden pseudo-R2
 as.vector(1 - (LLf / LL0))
 [1] 0.1006
-% Cox & Snell
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+#############################################################
 as.vector(1 - exp((2/N) * (LL0 - LLf)))
 [1] 0.2435
 Nagelkerke
@@ -246,11 +187,7 @@ Nagelkerke
 as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
 [1] 0.2597
 Coefficient tests and overall model test
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+#############################################################
 Individual coefficient tests
 
 Estimated standard deviations and z-values for parameters
@@ -263,11 +200,7 @@ sumOrd   <- summary(vglmFit)
 (Intercept):3 -18.28507    5.49804  -3.326
 X1              0.11197    0.03122   3.586
 X2             -0.09518    0.02694  -3.533
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+############################################################
 Approximative Wald-based confidence intervals
 
 zCrit   <- qnorm(c(0.05/2, 1 - 0.05/2))
@@ -288,13 +221,9 @@ Error: Objekt 'dfOrd' nicht gefunden
 summary(clmFit)
 # not shown
 Model comparisons - likelihood-ratio tests
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
-Likelihood-ratio-test for predictor X2
-
+######################################################################
+# Likelihood-ratio-test for predictor X2
+# 
 We need to specify VGAM::lrtest() here because after attaching package mlogit above, there is another function present with the same name.
 
 vglmR <- vglm(Yord ~ X1, family=propodds, data=dfOrd)
@@ -322,11 +251,7 @@ Model 2: Yord ~ 1
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 Test assumption of proportional odds (=parallel logits)
 
-\end{frame}
-%================================================ %
-\begin{frame}[fragile]
-\frametitle{Negative Binomial Regression with \texttt{R} }
-\Large
+#########################################################################
 vglmP <- vglm(Yord ~ X1 + X2, family=cumulative(parallel=TRUE,  reverse=TRUE),
               data=dfOrd)
 
