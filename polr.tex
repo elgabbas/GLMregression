@@ -1,0 +1,124 @@
+% - http://stackoverflow.com/questions/17839292/polr-ordinal-logistic-regression-in-r
+Following @joran's advice that your problem is probably the 100-level factor, I'm going to recommend something that probably isn't statistically valid but will probably still be effective in your particular situation: don't use logistic regression at all. Just drop it. Perform a simple linear regression and then discretize your output as necessary using a specialized rounding procedure. Give it a shot and see how well it works for you.
+rep.v = c(0.00, 0.04, 0.06, 0.13, 0.15, 0.05, 0.07, 0.00, 0.06, 0.04, 0.05, 0.00, 0.92, 0.95, 0.95, 1, 0.97, 0.06, 0.06, 0.03, 0.03, 0.08, 0.07, 0.04, 0.08, 0.03, 0.07, 0.05, 0.05, 0.06, 0.04, 0.04, 0.08, 0.04, 0.04, 0.04, 0.97, 0.03, 0.04, 0.02, 0.04, 0.01, 0.06, 0.06, 0.07, 0.08, 0.05, 0.03, 0.06,0.03)
+
+\begin{framed}
+\begin{verbatim}
+set.seed(10)
+pred.1 = factor(sample(x=rep(1:5,10),size=50))
+pred.2 = factor(sample(x=rep(c('a','b','c','d','e'),10),size=50))
+
+model = lm(rep.v~as.factor(pred.1) + as.factor(pred.2))
+output = predict(model, newx=data.frame(pred.1, pred.2))
+
+# Here's one way you could accomplish the discretization/rounding
+f.levels = unique(rep.v)
+rounded = sapply(output, function(x){ 
+  d = abs(f.levels-x)
+  f.levels[d==min(d)]
+  }
+)
+\end{verbatim}
+\end{framed}
+
+\begin{verbatim}
+>rounded
+
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24 
+0.06 0.07 0.00 0.06 0.15 0.00 0.07 0.00 0.13 0.06 0.06 0.15 0.15 0.92 0.15 0.92 0.15 0.15 0.06 0.06 0.00 0.07 0.15 0.15 
+  25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45   46   47   48 
+0.15 0.15 0.00 0.00 0.15 0.00 0.15 0.15 0.07 0.15 0.00 0.07 0.15 0.00 0.15 0.15 0.00 0.15 0.15 0.15 0.92 0.15 0.15 0.00 
+  49   50 
+0.13 0.15 
+\end{verbatim}
+%==============================================================%
+\newpage
+% - http://stats.stackexchange.com/questions/7720/how-to-understand-output-from-rs-polr-function-ordered-logistic-regression
+
+
+I am new to R, ordered logistic regression, and polr.
+
+The "Examples" section at the bottom of the help page for polr (that fits a logistic or probit regression model to an ordered factor response) shows
+options(contrasts = c("contr.treatment", "contr.poly"))
+house.plr <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+pr <- profile(house.plr)
+plot(pr)
+pairs(pr) 
+%==============================================================%
+\begin{itemize}	
+\item	How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
+\item	How does one apply and interpret anova on this model? The docs say "There are methods for the standard model-fitting functions, including predict, summary, vcov, anova." However, running anova(house.plr) results in anova is not implemented for a single "polr" object
+\item	How does one interpret the t values for each coefficient? Unlike some model fits, there are no P values here.
+\item	What information does pr contain? The help page on profile is generic, and gives no guidance for polr.
+\item	What is pairs(pr) showing? It looks like a plot for each pair of input variables, but again I see no explanation of the X or Y axes.
+\item	What is plot(pr) showing? I see six graphs. Each has an X axis that is numeric, although the label is an indicator variable (looks like an input variable that is an indicator for an ordinal value). Then the Y axis is "tau" which is completely unexplained.
+\end{itemize}	
+
+
+ 
+I realize this is a lot of questions, but it makes sense to me to ask as one bundle ("how do I use this thing?") rather than 7 different questions. Any information appreciated.
+
+%============================================5
+\newpage
+I would suggest you look at books on categorical data analysis (cf. Alan Agresti's Categorical Data Analysis, 2002) for better explanation and understanding of ordered logistic regression. All the questions that you ask are basically answered by a few chapters in such books. If you are only interested in R related examples, Extending Linear Models in R by Julian Faraway (CRC Press, 2008) is a great reference.
+
+Before I answer your questions, ordered logistic regression is a case of multinomial logit models in which the categories are ordered. Suppose we have J ordered categories and that for individual i, with ordinal response Yi, pij=P(Yi=j) for j=1,...,J. With an ordered response, it is often easier to work with the cumulative probabilities, γij=P(Yi≤j). The cumulative probabilities are increasing and invariant to combining adjacent categories. Furthermore, γiJ=1, so we need only model J–1 probabilities.
+
+Now we want to link γijs to covariates x. In your case, Sat has 3 ordered levels: low, medium, high. It makes more sense to treat them as ordered rather than unordered. The remaining variables are your covariates. The specific model that you are considering is the proportional odds model and is mathematically equivalent to:
+
+\[logit γj(xi)=θj−βTxi,j=1…J−1]\
+where γj(xi)=P(Yi≤j|xi)
+It is so called because the relative odds for $Y\leq j$ comparing x1 and x2 are:
+
+\[(γj(x1)1−γj(x1))/(γj(x2)1−γj(x2))=exp(−βT(x1−x2))\]
+Notice, the above expression does not depend on j. Of course, the assumption of proportional odds does need to be checked for a given dataset.
+
+Now, I will answer some (1, 2, 4) questions.
+
+How can one understand if the model gave a good fit? summary(house.plr) shows Residual Deviance 3479.149 and AIC (Akaike Information Criterion?) of 3495.149. Is that good? In the case those are only useful as relative measures (i.e. to compare to another model fit), what is a good absolute measure? Is the residual deviance approximately chi-squared distributed? Can one use "% correctly predicted" on the original data or some cross-validation? What is the easiest way to do that?
+
+%-----------------------------------------------%
+\newpage
+
+A model fit by \texttt{polr} is a special glm, so all the assumptions that hold for a traditional glm hold here. If you take care of the parameters properly, you can figure out the distribution. Specifically, to test the if the model is good or not you may want to do a goodness of fit test, which test the following null (notice this is subtle, mostly you want to reject the null, but here you don't want to reject it to get a good fit):
+
+Ho: current model is good enough 
+You would use the chi-square test for this. The p-value is obtained as:
+\begin{verbatim}
+1-pchisq(deviance(house.plr),df.residual(house.plr))
+\end{verbatim}
+Most of the time you'd hope to obtain a p-value greater than 0.05 so that you don't reject the null to conclude that the model is good fit (philosophical correctness is ignored here).
+
+AIC should be high for a good fit at the same time you don't want to have a large number of parameters. stepAIC is a good way to check this.
+
+Yes, you can definitely use cross validation to see if the predictions hold. See predict function (option: type = "probs") in ?polr. All you need to take care of is the covariates.
+
+What information does pr contain? The help page on profile is generic, and gives no guidance for polr
+
+As pointed by @chl and others, pr contains all the information needed for obtaining CIs and other likelihood related information of the polr fit. All glms are fit using iteratively weighted least square estimation method for the log likelihood. In this optimization you obtain a lot of information (please see the references) which will be needed for calculating Variance Covariance Matrix, CI, t-value etc. It includes all of it.
+
+How does one interpret the t values for each coefficient? Unlike some model >fits, there are no P values here.
+
+Unlike normal linear model (special glm) other glms are don't have the nice t-distribution for the regression coefficients. Therefore all you can get is the parameter estimates and their asymptotic variance covariance matrix using the max-likelihood theory. Therefore:
+
+Variance(β^)=(XTWX)−1ϕ^
+Estimate divided by its standard error is what BDR and WV call t-value (I am assuming MASS convention here). It is equivalent to t-value from normal linear regression but does not follow a t-distribution. Using CLT, it is asymptotically normally distributed. But they prefer not to use this approx (I guess), hence no p-values. (I hope I am not wrong, and if I am, I hope BDR is not on this forum. I further hope, someone will correct me if I am wrong.)
+
+
+%------------------------------------------------%
+  	 	
+ 1. Functionally in R, how does one test the proportional odds assumption? 2. Are you sure that chi-squared test is right? On this example it returns 0, meaning .. crappy fit? But some of the t values are pretty high (InflHigh 10.1, InflMedium 5.4, ContHigh 3.7). 3. What are the plots or pairs showing? –  dfrankow Mar 10 '11 at 16:38
+  	 	
+Thanks for your extensive answer suncoolsu. I'm in a similar situation and have a couple of questions. 1. I also get 0 for every model using your chi-sq test equation. 2. The wikipedia page on AIC says "the preferred model is the one with the minimum AIC value", but you said, "AIC should be high for a good fit." I'm trying to reconcile these accounts. –  Sam Swift Mar 17 '11 at 15:02
+  	 	
+%------------------------------------------------%
+
+if you get a p-value = 0, it means the model is NOT a good fit as goodness of fit test fails. Regarding the problem of AIC, wikipedia and I are using a different convention for it. I am using the one that is used by BDR and WV. (cf. Extending linear Models in R, by Dr. Julian Faraway) –  suncoolsu Mar 17 '11 at 20:16
+%------------------------------------------------%
+
+
+To 'test' (i.e., evaluate) the proportional odds assumption in R, you can use residuals.lrm() in Frank Harrell Jr.'s Design package. If you type ?residuals.lrm , there is a quick-to-replicate example of how Frank Harrell recommends evaluating the proportional odds assumption (i.e., visually, rather than by a push-button test). Design estimates ordered logistic regressions using lrm(), which you can substitute for polr() from MASS. 
+
+For a more formal example of how to visually test the proportional odds assumption in R, see: Paper: Ordinal Response Regression Models in Ecology Author(s): Antoine Guisan and Frank E. Harrell Source: Journal of Vegetation Science, Vol. 11, No. 5 (Oct., 2000), pp. 617-626
+
+\end{document}
