@@ -1,7 +1,0 @@
-\frametitle{Ordinal Logistic Regression with \texttt{R}}
-\Large
-\begin{itemize}
-\item  Harrell does recommend a graphical method for assessing the parallel slopes assumption.
-\item The values displayed in this graph are essentially (linear) predictions from a logit model, used to model the probability that y is greater than or equal to a given value (for each level of y), using one predictor (x) variable at a time.
-% \item In order create this graph, you will need the Hmisc library.
-\end{itemize}

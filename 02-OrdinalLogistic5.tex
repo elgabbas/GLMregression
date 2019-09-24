@@ -1,26 +1,24 @@
 \documentclass[00-GLMregslides.tex]{subfiles}
 \begin{document}
-	%================================================ %
-	\begin{frame}[fragile]
-		\frametitle{Ordered Logistic regression \texttt{R} }
-	
-	\Large
+%================================================ %
+\begin{frame}[fragile]
+\frametitle{Ordered Logistic regression \texttt{R} }
+\Large
 \begin{itemize}
-\item Turning our attention to the predictions with public as a predictor variable, we see that when public is set to "no" the difference in predictions for apply greater than or equal to two, versus apply greater than or equal to three is about 2.14 (-0.204 - -2.345 = 2.141). 
-\item When public is set to "yes" the difference between the coefficients is about 1.37 (-0.175 - -1.547 = 1.372).
+\item Turning our attention to the predictions with public as a predictor variable, we see that when public is set to ``\textit{No}" the difference in predictions for apply greater than or equal to two, versus apply greater than or equal to three is about 2.14 \\$(-0.204 - (-2.345) = 2.141)$. 
+\item When public is set to "yes" the difference between the coefficients is about 1.37.\\ $(-0.175 - (-1.547) = 1.372)$.
+\end{itemize}
+\end{frame}
+%================================================ %
+\begin{frame}[fragile]
+\frametitle{Ordered Logistic regression \texttt{R} }
+\Large
+\begin{itemize}
+\item  The differences in the distance between the two sets of coefficients (2.14 vs. 1.37) may suggest that the parallel slopes assumption does not hold for the predictor public. \smallskip
+\item That would indicate that the effect of attending a public versus private school is different for the transition from ``\textit{unlikely}" to ``\textit{somewhat likely}" and ``\textit{somewhat likely}" to ``\textit{very likely}."
 \end{itemize}
 \end{frame}
 	
-	%================================================ %
-	\begin{frame}[fragile]
-		\frametitle{Ordered Logistic regression \texttt{R} }
-		\Large
-\begin{itemize}
-\item  The differences in the distance between the two sets of coefficients (2.14 vs. 1.37) may suggest that the parallel slopes assumption does not hold for the predictor public. 
-\item That would indicate that the effect of attending a public versus private school is different for the transition from "unlikely" to "somewhat likely" and "somewhat likely" to "very likely."
-\end{itemize}
-\end{frame}
-%%			
 %%		%================================================ %
 %%		\begin{frame}[fragile]
 %%			\frametitle{Ordered Logistic regression \texttt{R} }
@@ -29,27 +27,23 @@
 %%		\end{frame}
 %%			
 %%			
-%%			
-	
-	%================================================ %
-	\begin{frame}[fragile]
-		\frametitle{Ordered logistic regression \texttt{R} }
-		\Large
+%================================================ %
+\begin{frame}[fragile]
+\frametitle{Ordered logistic regression \texttt{R} }
+\Large
 
 \begin{itemize}
 \item 		If the proportional odds assumption holds, for each predictor variable, distance between the symbols for each set of categories of the dependent variable, should remain similar. 
 \item To help demonstrate this, we normalized all the first set of coefficients to be zero so there is a common reference point.
 \end{itemize}
-		
-	\end{frame}
-	
-	%================================================ %
-	\begin{frame}[fragile]
-		\frametitle{Ordered logistic regression \texttt{R} }
-		\Large
+\end{frame}
+%================================================ %
+\begin{frame}[fragile]
+\frametitle{Ordered logistic regression \texttt{R} }
+\Large
 \begin{itemize}
 \item		Looking at the coefficients for the variable pared we see that the distance between the two sets of coefficients is similar. 
 \item In contrast, the distances between the estimates for public are different (i.e. the markers are much further apart on the second line than on the first), suggesting that the proportional odds assumption may not hold.
 \end{itemize}
-	\end{frame}
+\end{frame}
 \end{document}

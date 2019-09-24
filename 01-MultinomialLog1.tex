@@ -1,5 +1,3 @@
-%% R Data Analysis Examples: Multinomial Logistic Regression
-
 \documentclass[00-GLMregslides.tex]{subfiles}
 
 \begin{document}
@@ -10,11 +8,12 @@
 \textbf{Multinomial Logistic Regression}\\
 \bigskip
 \begin{itemize}
-\item In statistics, multinomial logistic regression is a classification method that generalizes logistic regression to multiclass problems, 
+\item Multinomial Logistic Regression is a classification method that generalizes logistic regression to \textbf{multiclass problems}, 
 i.e. with more than two possible discrete outcomes.
 \item That is, it is a model that is used to predict the probabilities of the different possible outcomes of a 
 categorically distributed dependent variable, given a set of independent 
-variables (which may be real-valued, binary-valued, categorical-valued, etc.).
+variables 
+\item These predictor variables may be real-valued, binary-valued, categorical-valued, etc.
 \end{itemize}
  
 \end{frame}
@@ -33,56 +32,45 @@ variables (which may be real-valued, binary-valued, categorical-valued, etc.).
 
 
 
-%================================================================================================%
+%================================================================%
 \begin{frame}[fragile]
-
 \frametitle{Multinomial Regression with \texttt{R}}
-\Large
-The main package we will use is the \textbf{\textit{nnet}} package. We will also use the \textbf{\textit{ggplot2}} and \textbf{\textit{reshape2}} package. 
-% Make sure that you can load them before trying to run the examples on this page.
-% If you do not have a package installed, run: install.packages("packagename"), or if you see the version is out of date, run: update.packages().
-
-\begin{framed}
-\begin{verbatim}
-install.packages("nnet")
-library(nnet)
-
-library(ggplot2)
-library(reshape2)
-\end{verbatim}
-\end{framed}
-
-% Version info: Code for this page was tested in R version 3.1.0 (2014-04-10)
-% On: 2014-06-13
-% With: reshape2 1.2.2; ggplot2 0.9.3.1; nnet 7.3-8; foreign 0.8-61; knitr 1.5 
-
-% Please note: The purpose of this page is to show how to use various data analysis commands. 
-% It does not cover all aspects of the research process which researchers are expected to do. 
-% In particular, it does not cover data cleaning and checking, verification of assumptions, model diagnostics or potential follow-up analyses. 
-
+	\Large
+	The main package we will use is the \textbf{\textit{nnet}} package. We will also use the \textbf{\textit{ggplot2}} and \textbf{\textit{reshape2}} package. 
+	
+	\begin{framed}
+		\begin{verbatim}
+		install.packages("nnet")
+		library(nnet)
+		
+		library(ggplot2)
+		library(reshape2)
+		\end{verbatim}
+	\end{framed}
+	
 \end{frame}
 %=========================================%
 \begin{frame}
-\textbf{nnet}
-
-\begin{itemize}
-\item Title : Feed-forward Neural Networks and Multinomial Log-Linear Models
-\item Description : Software for feed-forward neural networks with a single
-hidden layer, and for multinomial log-linear models.
-\item Authors : Brian Ripley ,William Venables 
-\item URL : http://www.stats.ox.ac.uk/pub/MASS4/
-\end{itemize}
-
+	\textbf{nnet}
+	
+	\begin{itemize}
+		\item Title : Feed-forward Neural Networks and Multinomial Log-Linear Models
+		\item Description : Software for feed-forward neural networks with a single
+		hidden layer, and for multinomial log-linear models.
+		\item Authors : Brian Ripley ,William Venables 
+		\item URL : http://www.stats.ox.ac.uk/pub/MASS4/
+	\end{itemize}
+	
 \end{frame}
 %========================================================%
 \begin{frame}[fragile]		
-	\frametitle{Multinomial Logistic regression \texttt{R} }	
+	\frametitle{Multinomial Logistic Regression with \texttt{R} }	
 	\Large	
-		\textbf{Examples of multinomial logistic regression}
+		\textbf{Applications}
 \begin{itemize}		
 \item	Which major will a college student choose, given their grades, stated likes and dislikes, etc.?	
 \item	Which blood type does a person have, given the results of various diagnostic tests?	
-\item	In a hands-free mobile phone dialing application, which person's name was spoken, given various properties of the speech signal?	
+%\item	In a hands-free mobile phone dialing application, which person's name was spoken, given various properties of the speech signal?	
 \item	Which candidate will a person vote for, given particular demographic characteristics?	
 \item	Which country will a firm locate an office in, given the characteristics of the firm and of the various candidate countries?	
 \end{itemize}		
@@ -93,12 +81,12 @@ hidden layer, and for multinomial log-linear models.
 	
 	\frametitle{Multinomial Regression with \texttt{R}}
 	\Large
-	\textbf{Examples of multinomial logistic regression}
+	\textbf{Examples of Multinomial Logistic Regression}
 	
 	\begin{description}
 
 		
-		\item[Example 1.] Entering high school students make program choices among general program, vocational program and academic program. Their choice might be modeled using their writing score and their social economic status.
+		\item[Example 1.] Entering high school students make program choices among general program, vocational program and academic program. \\ Their choice might be modeled using their writing score and their social economic status.
 	\end{description}
 \end{frame}
 %================================================================================================%
@@ -106,13 +94,11 @@ hidden layer, and for multinomial log-linear models.
 	
 	\frametitle{Multinomial Regression with \texttt{R}}
 	\Large
-	\textbf{Examples of multinomial logistic regression}
+	\textbf{Examples of Multinomial Logistic Regression}
 	
 	\begin{description}
-		\item[Example 2.] People's occupational choices might be influenced by their parents' occupations and their own education level. We can study the relationship of one's occupation choice with education level and father's occupation. The occupational choices will be the outcome variable which consists of categories of occupations. 
-		
-
-	\end{description}
+		\item[Example 2.] People's occupational choices might be influenced by their parents' occupations and their own education level. \\ We can study the relationship of one's occupation choice with education level and father's occupation. \\ The occupational choices will be the outcome variable which consists of categories of occupations. 
+		\end{description}
 \end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
@@ -123,35 +109,36 @@ hidden layer, and for multinomial log-linear models.
 
 \begin{description}
 
-\item[Example 3.] A biologist may be interested in food choices that alligators make. Adult alligators might have different preferences from young ones. The outcome variable here will be the types of food, and the predictor variables might be size of the alligators and other environmental variables.
+\item[Example 3.] A biologist may be interested in food choices that alligators make. Adult alligators might have different preferences from young ones. \\ The outcome variable here will be the types of food, and the predictor variables might be size of the alligators and other environmental variables.
  
 
 \end{description}
 \end{frame}
+
 %================================================================================================%
-\begin{frame}[fragile]
-\Large
-\textbf{Description of the Data}
- 
-We will use the third example using the \textit{multilog} data set (or \textit{ml}).
+%\begin{frame}[fragile]
+%\Large
+%\textbf{Description of the Data}
+% 
+%We will use the third example using the \textit{multilog} data set (or \textit{ml}).
 
 % Let's first read in the data.
 
-\begin{framed}
-\begin{verbatim}
-
-ml <- read.csv("multilog.csv",header=T)
-\end{verbatim}
-\end{framed}
+%\begin{framed}
+%\begin{verbatim}
+%
+%ml <- read.csv("multilog.csv",header=T)
+%\end{verbatim}
+%\end{framed}
  
  
-\end{frame}
+%\end{frame}
 %================================================================================================%
 \begin{frame}[fragile]
 \Large	
 	\textbf{Description of the Data}
 \begin{itemize}
-\item The outcome variable is \textbf{prog}, program type. 
+\item The outcome variable is \textbf{prog}, the program type. 
 \item The two predictor variables are
 \end{itemize}
 { \Large
@@ -170,7 +157,7 @@ ml <- read.csv("multilog.csv",header=T)
 \Large
 \frametitle{Multinomial Regression with \texttt{R}}
 \Large
-
+\begin{framed}
 \begin{verbatim}
 table(ml$ses, ml$prog)
 
@@ -179,7 +166,7 @@ low         16       19       12
 middle      20       44       31
 high         9       42        7
 \end{verbatim} 
- 
+\end{framed}
 % with(ml, do.call(rbind, tapply(write, prog, function(x) c(M = mean(x), SD = sd(x)))))
 \begin{verbatim} 
               M    SD

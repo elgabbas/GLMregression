@@ -12,14 +12,14 @@
 \begin{frame}[fragile]
 \frametitle{Multinomial Logistic Regression with \texttt{R}}
 \Large
-\textbf{Multinomial logistic regression}
+\textbf{Multinomial Logistic Regression}
 \begin{itemize}
 \item 
 We use the \texttt{multinom} function from the \textbf{nnet} package to estimate a multinomial logistic regression model. 
 
 \item Remark - There are other functions in other R packages capable of multinomial regression, such as the \textbf{mlogit} package. 
 \item
-  The \texttt{multinom} function does not require the data to be reshaped (as the mlogit package does) 
+  The \texttt{multinom} function does not require the data to be reshaped (as the \textbf{mlogit} package does) 
 \item (Similar format to example code found in Hilbe's \textit{Logistic Regression Models}).
 \end{itemize}
 \end{frame}
@@ -111,10 +111,12 @@ summary(test)
 %=========================================%
 \begin{frame}
 \frametitle{Multinomial Logistic Regression with \texttt{R}}
+\Large
 \textbf{Wald Test}
 
 \begin{itemize}
-\item The Wald test in the context of logistic regression is used to determine whether a certain predictor variable X  is significant or not. It rejects the null hypothesis of the corresponding coefficient being zero. 
+\item The Wald test in the context of logistic regression is used to determine whether a certain predictor variable X  is significant or not. 
+\item It rejects the null hypothesis of the corresponding coefficient being zero. 
 
 \item The test consists of dividing the value of the coefficient by standard error 
 \end{itemize}
@@ -193,9 +195,10 @@ and it can be used in comparisons of nested models (360).
 	\Large
 	\begin{itemize}
 
-\item A one-unit increase in the variable \textbf{\textit{write}} is associated with the decrease in the log odds of being in general program vs. academic program in the amount of 0.058 (b$_{13}$).
+\item A one-unit increase in the variable \textbf{\textit{write}} is associated with the decrease in the log odds of being in general program vs. academic program in the amount of \textit{0.058 (b$_{13}$)}.
+\smallskip
 \item A one-unit increase in the variable \textbf{\textit{write}} is associated with the decrease 
-in the log odds of being in vocation program vs. academic program in the amount of 0.1136 (b$_{23}$).
+in the log odds of being in vocation program vs. academic program in the amount of \textit{0.1136 (b$_{23}$)}.
 \end{itemize}
 \end{frame}
 %================================================================================================%
@@ -205,9 +208,10 @@ in the log odds of being in vocation program vs. academic program in the amount 
 \Large
 \begin{itemize}
 \item The log odds of being in general program vs. in academic program will decrease by 
-1.163 if moving from ses="low" to ses="high"b$_{12}$.
+1.163 if moving from \textit{ses="low"} to \textit{ses="high"b$_{12}$}.
+\smallskip
 \item The log odds of being in general program vs. in academic 
-program will decrease by 0.533 if moving from ses="low" to ses="middle"b$_{11}$, 
+program will decrease by 0.533 if moving from \textit{ses="low"} to \textit{ses="middle"b$_{11}$}, 
 although this coefficient is not significant.
 \end{itemize}
 \end{frame}

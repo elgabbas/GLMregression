@@ -16,7 +16,7 @@ library(nnet)
 library(ggplot2)
 library(reshape2)
 
-ml <- read.csv("multilog.csv")
+ml <- read.csv("https://raw.githubusercontent.com/RWorkshop/workshopdatasets/master/multilog.csv")
   
 ###############################################
 
